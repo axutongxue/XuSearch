@@ -1,0 +1,326 @@
+{
+  "version": 2,
+  "searchGroups": [
+    {
+      "id": "ai-search-url",
+      "name": "AI搜索（搜索串版）",
+      "mode": "compare",
+      "groupTag": "AI",
+      "siteIds": [
+        "metaso-ai-search",
+        "wenxin-ai-search",
+        "qianwen-ai-search",
+        "sogou-ai-search",
+        "so-ai-search",
+        "nami-ai-search",
+        "douyin-ai-search",
+        "zhida-ai-search",
+        "xhs-ai-search",
+        "weibo-ai-search"
+      ]
+    },
+    {
+      "id": "search-domestic",
+      "name": "社交搜索",
+      "mode": "tabs",
+      "siteIds": [
+        "bilibili-search",
+        "xiaohongshu-search",
+        "weibo-search",
+        "douyin-search",
+        "zhihu-search",
+        "douban-group-search",
+        "tieba-search",
+        "hupu-search",
+        "github-search",
+        "sogou-weixin-search",
+        "jike-search",
+        "x-search",
+        "facebook-search",
+        "instagram-search",
+        "youtube-search"
+      ]
+    },
+    {
+      "id": "traditional-search",
+      "name": "传统搜索",
+      "mode": "tabs",
+      "siteIds": [
+        "bing-search",
+        "baidu-search",
+        "so-search",
+        "quark-search",
+        "toutiao-search",
+        "google-search",
+        "yandex-search"
+      ]
+    }
+  ],
+  "promptGroups": [
+    {
+      "id": "prompt-group-clarify",
+      "name": "问清问题",
+      "prompts": [
+        {
+          "id": "prompt-mental-socratic",
+          "title": "苏格拉底式提问",
+          "builtInUpdatedAt": "2026-10-10",
+          "content": "我的困惑是：\n\n先不要给建议。请对我进行一次苏格拉底式问诊，通过最多6个问题，帮我找到真正值得回答的问题。\n\n请遵守这些规则：\n1. 每次只问一个问题，根据我的回答决定下一问，不要提前给我一整套问卷；\n2. 优先区分我说的是可验证的事实、对事实的解释、价值判断，还是我希望实现的目标；\n3. 检查关键词是否含糊、我默认了哪些前提、证据来自哪里、有没有相反解释，以及结论成立或不成立分别意味着什么；\n4. 每次提问前，用一句话说明上一条回答让你更新了什么判断；\n5. 只问可能改变结论的问题。信息足够时立刻停止，不必凑满6个。\n\n问诊结束后，请整理出：\n1. 我最开始问的问题；\n2. 我真正想解决的问题；\n3. 已经确认的事实；\n4. 仍未验证的假设；\n5. 最可能改变结论的关键变量；\n6. 一个准确、具体、可以继续行动的新问题。\n\n等我确认这个新问题以后，再给出你的判断、理由和下一步行动。"
+        },
+        {
+          "id": "prompt-socratic-questioning",
+          "title": "苏格拉底式追问",
+          "builtInUpdatedAt": "2026-10-10",
+          "content": "请先回答这个问题：\n\n回答以后，请继续逐项回应我对这份答案的追问：\n1.你的回答使用了哪些关键概念？其中有没有含义不清、可能被不同理解的词？\n2.你的结论默认了哪些前提？哪一个前提最关键，也最可能不成立？\n3.支持这个结论的证据是什么？哪些内容来自已知事实，哪些只是推测？\n4.如果当前结论是错的，还有哪些解释能够说明同样的现象？\n5.请给出一个最有力的反例，说明当前结论会在什么情况下失效。\n6.根据以上检查，重新表述我的问题，再给出一版修正后的答案。\n\n请明确区分：已知事实、合理推断和仍然不确定的部分。"
+        },
+        {
+          "id": "prompt-restate",
+          "title": "重述内容",
+          "builtInUpdatedAt": "2026-10-10",
+          "content": "我的问题是：\n\n用你自己的话重述你认为我的目标是什么，以及我试图解决的问题是什么？"
+        }
+      ]
+    },
+    {
+      "id": "prompt-group-solving-problem",
+      "name": "解决问题",
+      "prompts": [
+        {
+          "id": "prompt-mental-first-principles",
+          "title": "第一性原理",
+          "builtInUpdatedAt": "2026-10-08",
+          "content": "我的问题是：\n\n请用第一性原理分析帮我分析以上问题，不要给我惯例答案，从底层事实重新推导。\n\n输出结构：\n1. 表面问题 —— 我现在看起来在问什么？\n2. 底层事实 —— 哪些是确定事实？哪些只是假设？（明确区分）\n3. 不可改变的约束 —— 哪些现实条件必须接受？\n4. 可重新设计的部分 —— 哪些只是惯例，不一定非要这样？\n5. 从零推导的方案 —— 如果完全重新设计，最合理的解法是什么？\n6. 最小行动 —— 现在第一步做什么？（25分钟内可开始）\n\n风格要求：简洁、直接、不废话。"
+        },
+        {
+          "id": "prompt-across-domains",
+          "title": "跨领域借鉴解决办法",
+          "builtInUpdatedAt": "2026-10-08",
+          "content": "我的困惑是：\n\n请先剥掉行业术语，把它抽象成一个人类在其他领域也可能遇到的问题，并找出：\n1. 问题的底层结构\n2. 真正的核心矛盾\n3. 普通解法失效的原因\n\n然后从历史案例，以及至少3个彼此距离较远的领域中，寻找底层结构相似的问题。\n每个案例都要说明：\n1. 那个领域遇到了什么问题\n2. 使用了什么解决机制\n3. 与我的问题相似在哪里\n4. 哪些部分可以迁移\n5. 什么条件下会失效\n\n最后请选出最值得借用的3种机制，把它们翻译成适合我当前处境的解决方案，再推荐一个最值得先试的低成本、可逆实验。"
+        },
+        {
+          "id": "prompt-think-deeply",
+          "title": "深度思考",
+          "builtInUpdatedAt": "2026-10-08",
+          "content": "我的问题是：\n\n请先不要回答我的问题。在给出答案之前，请先完成以下分析：\n1.指出我在这个问题中没有明确说出、但已经默认成立的假设\n2.告诉我还缺少哪些关键信息，以及这些信息可能如何改变你的答案\n3.指出人们在处理这类问题时最常犯的一个错误。然后，请只向我提出一个最关键的问题。这个问题应该能够帮助你理解我的真实目标和具体情况，让最终答案真正对我有用，而不是一份谁都能套用的通用建议。\n\n等我回答以后，你再给出最终输出。"
+        },
+        {
+          "id": "prompt-meta-need-to-prompt",
+          "title": "模糊想法转可执行任务",
+          "builtInUpdatedAt": "2026-10-08",
+          "content": "我的想法是：\n\n请根据我提供的【模糊想法】或【初步需求】，帮我拆解成一个更清晰、可执行的任务说明。\n\n要求：\n1. 先判断我真正想达成的目标是什么。\n2. 保留我的原始意图，不要擅自改变方向。\n3. 把模糊表达拆成：目标、使用场景、目标用户、核心内容、限制条件、输出形式。\n4. 如果信息不足，可以基于合理假设补全，但必须明确标注。\n5. 如果任务比较复杂，请拆成清晰步骤，并告诉我第一步应该做什么。\n6. 不要写空话，要具体、直接、可执行。\n7. 最后向我提出最多 3 个最关键的问题，帮助我进一步澄清需求。\n\n输出格式：\n- 我的真实目标\n- 当前需求中不清楚的地方\n- 合理假设\n- 拆解后的任务说明\n- 可执行步骤\n- 最关键的 3 个问题"
+        }
+      ]
+    },
+    {
+      "id": "prompt-group-decision",
+      "name": "决策",
+      "prompts": [
+        {
+          "id": "prompt-mental-steelman",
+          "title": "双向钢人论证（解决不知道选哪个答案）",
+          "builtInUpdatedAt": "2026-10-10",
+          "content": "我需要做的决定是：\n\n先别急着回答，也别默认我已经把问题想清楚。请先做一次双向钢人论证：\n1. 用最完整、有力的方式，重述我真正需要做出的选择；\n2. 分别给出支持两个方向的最强理由、适用条件、最大收益、最大风险，以及最难回答的反对意见；\n3. 找出双方真正的分歧、最可能改变结论的关键变量，以及还需要补充的信息；\n\n等我回答以后，再给出明确判断、理由、适用条件和下一步行动。"
+        },
+        {
+          "id": "prompt-mm-major-decision",
+          "title": "重大决策前先让AI全力反驳",
+          "builtInUpdatedAt": "2026-10-10",
+          "content": "我的目标是：\n\n1.先禁止支持我，全力反驳，找出遗漏信息、盲目乐观假设、不可逆成本、机会成本、最坏风险、情绪带来的认知偏差\n2.切换支持视角，列出该决定成立的核心理由\n3.中立对比关键证据，告诉我哪边占优势、最大未知风险，出现哪些条件结论会反转，不要刻意平衡观点，拒绝强行五五开"
+        },
+        {
+          "id": "prompt-mental-inversion",
+          "title": "先反向思考失败路径",
+          "builtInUpdatedAt": "2026-10-08",
+          "content": "我的目标是：\n\n请用反向思考帮我找出失败路径，再推导出稳妥方案。\n\n输出结构：\n1. 最可能的失败原因 —— 如果这件事失败，最大概率是因为什么？\n2. 我现在的高风险做法 —— 哪些当前行为在增加失败概率？\n3. 容易被忽略的风险 —— 哪些风险我可能没意识到？\n4. 故意搞砸的方式 —— 如果我要让这件事失败，我会怎么做？\n5. 必须避免的行为清单 —— 反推出来的禁止动作\n6. 稳妥行动方案 —— 基于以上分析，给出更保险的执行路径\n\n风格要求：不要安慰我，直接指出盲点。"
+        },
+        {
+          "id": "prompt-mental-opportunity-cost",
+          "title": "从机会成本视角分析",
+          "builtInUpdatedAt": "2026-10-08",
+          "content": "我正在纠结：\n\n请用机会成本视角帮我分析这个决策，算清我真正在放弃什么。\n\n输出结构：\n1. 我选择它，实际放弃了什么？（列举被放弃的选项）\n2. 被放弃的选项中，哪个最有价值？\n3. 真实成本 —— 不只是钱，还有时间、注意力、精力、机会\n4. 最佳替代方案 —— 如果不做这个，最好的替代是什么？\n5. 最终建议 —— 做 / 不做 / 延后 / 降级处理（给出明确选项+理由）\n\n风格要求：务实，不要帮我合理化，直接说最优解。"
+        }
+      ]
+    },
+    {
+      "id": "prompt-group-learning",
+      "name": "学习",
+      "prompts": [
+        {
+          "id": "prompt-learning-html-explain",
+          "title": "用简单易懂的HTML网页解释",
+          "builtInUpdatedAt": "2026-10-10",
+          "content": "我想了解：\n\n像解释给一个对这个话题一无所知的人一样，用一个带有大图片和少量文字的HTML制品来解释。"
+        },
+        {
+          "id": "prompt-learning-dual-layer",
+          "title": "双层解释法",
+          "builtInUpdatedAt": "2026-10-10",
+          "content": "我想学习的是：\n\n请分两层解释：\n第一层，小白版。用生活化的语言和一个具体例子，让完全没有基础的人也能听懂。\n第二层，专业版。使用准确术语，讲清核心机制、适用边界和常见误解。\n\n最后请整理出：\n1. 列出小白说法与专业术语的对应关系；\n2. 我最容易理解错的地方；\n3. 3个用于检查我是否真正理解的问题。"
+        },
+        {
+          "id": "prompt-learning-reverse-teardown",
+          "title": "反向拆解",
+          "builtInUpdatedAt": "2026-10-10",
+          "content": "我想拆解的优秀范例是：\n\n我想学会的是：\n\n请先用一句话说明它解决了什么问题，再反向拆解它为什么有效。\n\n重点分析：\n1. 它服务谁，目标是什么；\n2. 它采用了什么结构或流程；\n3. 哪些关键选择拉开了质量差距；\n4. 它的完成标准是什么；\n5. 哪些规律可以迁移，哪些细节只适合这个案例。\n\n最后请给我：\n1. 提炼3到5条可复用规律；\n2. 一份可以照着执行的操作清单；\n3. 一个最值得先尝试的小练习。"
+        },
+        {
+          "id": "prompt-learning-vertical-horizontal",
+          "title": "横纵分析法",
+          "builtInUpdatedAt": "2026-10-10",
+          "content": "我的研究对象是：\n\n请使用横纵分析法，对它完成一份可追溯的深度研究。研究截止时间为执行当天。\n\n纵向分析：\n1. 它在什么背景和需求下诞生，关键推动者是谁；\n2. 它经历了哪些重要转折、成功和失败；\n3. 哪些早期选择变成了今天的能力、路径依赖或包袱。\n\n横向分析：\n1. 选择最值得比较的对象，并说明为什么选它们；\n2. 用统一维度比较各自的强项、短板和独特性；\n3. 解释用户、客户或市场为什么选择它，又为什么放弃它。\n\n把两条轴合起来，继续判断：\n1. 过去形成的能力、路径依赖和约束会怎样影响未来；\n2. 未来最可能出现哪3条路径；\n3. 每条路径出现的前提和预警信号是什么。\n\n请遵守这些证据规则：\n1. 优先使用官方资料、原始数据、论文、财报和访谈等一手来源；\n2. 重要结论就近标注来源与日期；\n3. 事实、推断和观点分开写；\n4. 遇到冲突信息时并列呈现，找不到证据时明确写“暂未核实”。\n\n最后按以下顺序输出：核心结论、关键时间线、横向对比表、详细分析、未来判断、仍待确认的问题。报告需要在10000～30000字之间，语言尽量通俗，不要堆砌资料。"
+        }
+      ]
+    },
+    {
+      "id": "prompt-group-tools",
+      "name": "工具",
+      "prompts": [
+        {
+          "id": "prompt-learning-adhd-minimal",
+          "title": "面向ADHD多动症患者风格的极简回答",
+          "builtInUpdatedAt": "2026-10-10",
+          "content": "我的问题是：\n\n我容易注意力分散，也容易被大量信息压住。回答先给结论，再给必要信息；复杂任务帮我拆小，一次只突出一个下一步；如果方案很多，先替我筛选，默认推荐一个。\n\n如果我说'好乱''看不懂'，不要继续给我增加信息。先告诉我：我们现在到底在解决什么、最重要的是什么、我现在只需要做哪一个动作。\n\n简单问题直接回答，复杂问题可以正常深入，不要为了迁就我，把内容写得幼稚或者过度简化。"
+        },
+        {
+          "id": "prompt-tools-asd-ste100",
+          "title": "航空级极简语言回答",
+          "builtInUpdatedAt": "2026-10-10",
+          "content": "请使用 ASD-STE100 规范进行解释："
+        },
+        {
+          "id": "prompt-tools-asd-ste100-80",
+          "title": "航空级极简语言回答（80%）",
+          "builtInUpdatedAt": "2026-10-10",
+          "content": "请用接近 80% ASD-STE100 规范的风格，向我解释："
+        },
+        {
+          "id": "prompt-tools-web-quality",
+          "title": "网站设计优化",
+          "builtInUpdatedAt": "2026-10-10",
+          "content": "替我设计一个网站，内容为：\n\n作为品质标准，目标是达到Awwwards、Webby awards、FWA能获奖的品质，通过自我检查，反复提升品质，直到达到那个品质标准为止。"
+        },
+        {
+          "id": "prompt-tools-fact-check",
+          "title": "事实核查",
+          "builtInUpdatedAt": "2026-10-10",
+          "content": "我要核查的说法是：\n\n请先把它拆成：\n1. 可以被外部验证的事实；\n2. 从事实推出的结论；\n3. 其中包含的价值判断。\n\n对于事实部分，请联网核查来源、样本、时间和完整上下文，并标记为：\n1. 已证实；\n2. 基本成立，但需要收窄；\n3. 存在争议；\n4. 证据不足；\n5. 明显错误。\n\n在假设相关事实成立的情况下，继续检查：\n1. 这些事实能否推出当前结论；\n2. 是否藏着未经验证的假设；\n3. 是否混淆相关性和因果关系；\n4. 是否遗漏了其他解释或关键信息；\n5. 结论在什么条件下成立或失效。\n\n最后请输出：\n1. 哪些事实可信，哪些需要修正；\n2. 推理链中最关键的漏洞；\n3. 补强后的最合理版本；\n4. 我目前可以相信到什么程度。"
+        },
+        {
+          "id": "prompt-meta-image-to-cn",
+          "title": "图片反推中文提示词",
+          "builtInUpdatedAt": "2026-10-10",
+          "content": "别只泛泛描述画面。请深度拆解这张图的主体细节构图景别、光影氛围、色彩搭配与艺术画风；并以此直接反推出一段高还原度的完整中文生图提示词，末尾附带画面比例、画质细节参数及负向排除词"
+        },
+        {
+          "id": "prompt-learning-video",
+          "title": "视频逐句稿总结",
+          "builtInUpdatedAt": "2026-10-08",
+          "content": "视频逐字稿：\n\n请帮我整理以上这份视频逐字稿，让它更有结构、更方便复盘和二次创作。\n\n要求：\n1. 识别文稿中的 3-5 个核心主题。\n2. 按主题重新组织内容，但不要改变原意。\n3. 尽量保留原文里的重要表达、观点和细节。\n4. 把实用方法、步骤、工具、案例单独标出来。\n5. 专业术语和关键概念用加粗标记。\n6. 名人名言或明显引用内容用引用格式标记。\n7. 如果原文有重复、口误或语音转写错误，可以轻微修正，但不要大改。\n8. 每个主题最后加一句简短总结。\n\n输出格式：\n**主题一：标题**\n\n整理后的内容\n\n- 实用方法：\n- 关键概念：\n- 典型案例：\n\n*一句话总结：*\n\n**主题二：标题**\n\n同上\n\n最后请补充：\n**整体摘要**\n\n用 3-5 句话总结这份文稿。\n\n**可二次创作的角度**\n\n给出 3 个适合改成文章、短视频或选题的方向。"
+        }
+      ]
+    }
+  ],
+  "selectionContextGroups": [
+    {
+      "id": "ctx_1779331397454",
+      "name": "Translate",
+      "enabled": true,
+      "prompt": "Please translate/rewrite the content below into 3 versions:\n\n1. Literal version: stay close to the original wording\n2. Super colloquial version: explain it like talking to a friend, no translationese\n3. Deep expression version + semantic analysis: make it more thoughtful, and briefly analyze keywords, tone, implied meaning, and translation challenges\n\n###",
+      "targetType": "sites",
+      "refGroupId": null,
+      "mode": "tabs",
+      "siteIds": [
+        "deepseek"
+      ]
+    }
+  ],
+  "customSites": [],
+  "aiSummarySettings": {
+    "providers": [
+      {
+        "id": "agnes",
+        "kind": "preset",
+        "label": "Agnes",
+        "baseUrl": "",
+        "apiKey": "",
+        "model": ""
+      },
+      {
+        "id": "ollama",
+        "kind": "preset",
+        "label": "Ollama",
+        "baseUrl": "",
+        "apiKey": "",
+        "model": ""
+      },
+      {
+        "id": "modelscope",
+        "kind": "preset",
+        "label": "魔搭社区 ModelScope",
+        "baseUrl": "",
+        "apiKey": "",
+        "model": ""
+      },
+      {
+        "id": "siliconflow",
+        "kind": "preset",
+        "label": "硅基流动",
+        "baseUrl": "",
+        "apiKey": "",
+        "model": ""
+      },
+      {
+        "id": "zhipu",
+        "kind": "preset",
+        "label": "智谱 BigModel",
+        "baseUrl": "",
+        "apiKey": "",
+        "model": ""
+      },
+      {
+        "id": "internai",
+        "kind": "preset",
+        "label": "书生",
+        "baseUrl": "",
+        "apiKey": "",
+        "model": ""
+      }
+    ],
+    "activeProviderIds": [
+      "agnes",
+      "ollama",
+      "modelscope",
+      "siliconflow",
+      "zhipu",
+      "internai"
+    ],
+    "defaultProviderId": "",
+    "promptGroups": [
+      {
+        "id": "pg_default",
+        "name": "Cross Analysis",
+        "prompt": "You are a multi-AI answer comparison assistant. The user asked the same question to multiple AIs. Do not answer the question again. Compare their answers.\n\nOutput these 3 sections:\n\n## 1. Shared Views\n\nSummarize the core points that multiple AIs agree on or express similarly.\n\n## 2. Different Views\n\nShow the main differences in a table:\n\n| AI Model | Core View |\n|---|---|\n| Auto-detected model name | Summarize its main view in one or two sentences |\n\nNote: focus on meaningful differences only. If differences are minor, say so directly.\n\n## 3. Overall Judgment\n\nGive a balanced, complete conclusion based on all answers.\n\nRequirements:\n- Be direct and concise.\n- Do not force artificial differences.\n- Do not repeat the original answers verbatim.\n- Focus on agreement, disagreement, and how to understand the result."
+      },
+      {
+        "id": "pg_mpj6xbys_p2mf",
+        "name": "Answer Fusion",
+        "prompt": "You are a multi-AI answer fusion assistant.\n\nThe user asked the same question to multiple AIs. Do not compare them one by one. Synthesize their answers into one clearer, more complete, and more useful final answer.\n\nOutput these 3 sections:\n\n## 1. Final Answer\n\nGive the best fused answer directly. It should be clear, logical, and ready to use.\n\n## 2. Fusion Basis\n\nBriefly explain which key points you mainly absorbed.\n\n## 3. Caveats\n\nPoint out what remains uncertain, missing, or needs further verification.\n\nRequirements:\n- Do not restate each AI answer separately.\n- Do not simply concatenate the originals.\n- Remove repetition, filler, and low-value content.\n- If AIs conflict, choose the more reasonable view and briefly explain why."
+      },
+      {
+        "id": "pg_mpj710eh_ohq7",
+        "name": "Critical Review",
+        "prompt": "You are a multi-AI answer review assistant.\n\nThe user asked the same question to multiple AIs. Do not answer the question again. Review the quality of these answers and identify reliable content, possible problems, and missing angles.\n\nOutput these 3 sections:\n\n## 1. What Looks Reliable\n\nSummarize views that seem sound, logical, and worth referencing.\n\n## 2. What May Be Problematic\n\nPoint out possible errors, vagueness, oversimplification, logical jumps, or claims that need verification.\n\n## 3. What Was Missing\n\nAdd important angles the AIs did not explain clearly enough.\n\nRequirements:\n- Do not criticize for its own sake.\n- Do not restate each AI answer separately.\n- If truth cannot be judged, say verification is needed.\n- Focus on what is reliable, risky, and incomplete."
+      }
+    ],
+    "defaultPromptGroupId": "pg_default"
+  },
+  "uiPrefs": {
+    "showHistory": true,
+    "showPromptButton": true,
+    "showAiPagePromptLauncher": true,
+    "searchPopupHotkeyEnabled": true,
+    "contextMenuEnabled": true,
+    "selectionSearchEnabled": false,
+    "diagnosticLogsEnabled": false
+  }
+}

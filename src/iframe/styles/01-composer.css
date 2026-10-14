@@ -1,0 +1,65 @@
+@import "./01a-composer-base.css";
+@import "./01b-composer-cards.css";
+
+
+.att-anchor { position: relative; display: inline-flex; }
+
+
+.upload-member-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0057ff;
+}
+.upload-member-badge .member-crown { width: 14px; height: 14px; display: block; }
+
+
+.member-tip {
+  position: absolute;
+  right: -6px;
+  bottom: calc(100% + 9px);
+  top: auto;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 264px;
+  padding: 9px 11px;
+  border-radius: 10px;
+  background: #17181a;
+  color: #f4f4f5;
+  font-size: 12px;
+  line-height: 1.55;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+.member-tip::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 100%;
+  bottom: auto;
+  border-top-color: #17181a;
+  border-bottom-color: transparent;
+  border: 5px solid transparent;
+}
+.member-tip-text { flex: 1; min-width: 0; }
+.member-tip-cta {
+  flex: none;
+  border: 0;
+  border-radius: 6px;
+  background: #0057ff;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 9px;
+  cursor: pointer;
+}
+.member-tip-cta:hover { background: #004ad9; }

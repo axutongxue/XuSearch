@@ -1,0 +1,33 @@
+
+
+.iframes-container[data-layout-rows="sidebar"] {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 100%;
+  padding: 0;
+}
+.iframes-container[data-layout-rows="sidebar"] .iframe-card {
+  display: grid;
+  position: absolute;
+  inset: 0 0 16px 0;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+.iframes-container[data-layout-rows="sidebar"] .iframe-card.is-active-card {
+  opacity: 1;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.iframes-container[data-layout-rows="sidebar"] .ai-iframe {
+  min-height: 0;
+  height: 100%;
+}
+.iframes-container[data-layout-rows="sidebar"] .iframe-card[hidden] { display: none; }

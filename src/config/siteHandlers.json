@@ -1,0 +1,1130 @@
+{
+  "sites": [
+    {
+      "id": "qianwen-ai-search",
+      "name": "千问AI搜索",
+      "url": "https://www.qianwen.com/?q={query}",
+      "logoUrl": "https://img30.360buyimg.com/imgzone/jfs/t20271106/535501/22/7073/931/6abf2fa4F2289fd11/0936050050d824c7.png",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "qianwen.com",
+        "www.qianwen.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "batchFollowUpSupported": true,
+      "followUpSearchHandler": {
+        "steps": [
+          {
+            "action": "focus",
+            "selectors": [
+              "div[data-slate-editor='true']",
+              "textarea",
+              "div[contenteditable='true']"
+            ],
+            "timeout": 10000,
+            "description": "追问：聚焦输入框"
+          },
+          {
+            "action": "setValue",
+            "selectors": [
+              "div[data-slate-editor='true']",
+              "textarea",
+              "div[contenteditable='true']"
+            ],
+            "inputType": "auto",
+            "description": "追问：写入问题",
+            "waitAfter": 700
+          },
+          {
+            "action": "smartSubmit",
+            "selectors": [
+              "div[data-slate-editor='true']",
+              "textarea"
+            ],
+            "optional": true,
+            "description": "追问：点「发送消息」",
+            "submitSelectors": [
+              "button[aria-label='发送消息']",
+              "button[aria-label*='发送']"
+            ],
+            "postClickVerifyMs": 2500,
+            "enterFallbackAfterClick": false
+          },
+          {
+            "action": "sendKeys",
+            "selectors": [
+              "div[data-slate-editor='true']",
+              "textarea"
+            ],
+            "keys": [
+              "Enter"
+            ],
+            "optional": true,
+            "description": "追问：回车发送（实测有效）"
+          }
+        ]
+      },
+      "supportAiSummary": true,
+      "extractor": {
+        "userSelector": [
+          "[class*='human-message']",
+          "[class*='user-message']",
+          "[class*='chat-bubble-user']",
+          "[class*='question-container']"
+        ],
+        "assistantSelector": [
+          "[class*='answer-message']",
+          "[class*='agent-chat__answer']",
+          "[class*='ai-message']",
+          "[class*='assistant-message']"
+        ],
+        "aiTextSelectors": [
+          "[class*='markdown']",
+          "[class*='answer-text']",
+          "[class*='content']"
+        ]
+      },
+      "pageTextExtractor": {
+        "tongyi.aliyun.com": {
+          "containers": [
+            "[class*='answer-message']",
+            "[class*='agent-chat__answer']",
+            "[class*='chat-bubble']"
+          ],
+          "content": [
+            "[class*='markdown']",
+            "[class*='answer-text']",
+            "[class*='content']"
+          ]
+        },
+        "qianwen.com": {
+          "containers": [
+            "[class*='answer-message']",
+            "[class*='ai-message']",
+            "[class*='assistant-message']"
+          ],
+          "content": [
+            "[class*='markdown']",
+            "[class*='answer-text']",
+            "[class*='content']"
+          ]
+        }
+      },
+      "stopButtonSelectors": [
+        "button[aria-label='停止回答']",
+        "button[aria-label*='Stop']",
+        "button[aria-label*='停止']",
+        "button[data-testid*='stop']",
+        "button[title*='停止']"
+      ]
+    },
+    {
+      "id": "nami-ai-search",
+      "name": "纳米AI搜索",
+      "url": "https://so.n.cn/?q={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "so.n.cn"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "batchFollowUpSupported": true,
+      "followUpSearchHandler": {
+        "steps": [
+          {
+            "action": "focus",
+            "selectors": [
+              "textarea.composition-input",
+              "textarea[placeholder*='提出后续问题']"
+            ],
+            "timeout": 25000,
+            "description": "追问：聚焦追问框（该站挂载较晚）"
+          },
+          {
+            "action": "setValue",
+            "selectors": [
+              "textarea.composition-input",
+              "textarea[placeholder*='提出后续问题']"
+            ],
+            "inputType": "auto",
+            "maxAttempts": 20,
+            "stableWaitMs": 600,
+            "description": "追问：写入问题",
+            "waitAfter": 700
+          },
+          {
+            "action": "sendKeys",
+            "selectors": [
+              "textarea.composition-input",
+              "textarea[placeholder*='提出后续问题']"
+            ],
+            "keys": [
+              "Enter"
+            ],
+            "description": "追问：回车发送（追问框自述「Enter发送」）"
+          }
+        ]
+      },
+      "supportAiSummary": true,
+      "stopButtonSelectors": [
+        "[class*='message-progress-box']",
+        "[class*='message-progress']"
+      ],
+      "extractor": {
+        "userSelector": [
+          "#message-prompt"
+        ],
+        "assistantSelector": [
+          ".js-article-content"
+        ]
+      },
+      "pageTextExtractor": {
+        "so.n.cn": {
+          "containers": [
+            ".js-article-content"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bilibili-search",
+      "name": "哔哩哔哩",
+      "url": "https://search.bilibili.com/all?keyword={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "search.bilibili.com",
+        "bilibili.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "supportAnswerProbe": false,
+      "cardLayout": [
+        "wide-media",
+        "social-media"
+      ],
+      "dnrEmbedHeaders": true
+    },
+    {
+      "id": "xiaohongshu-search",
+      "name": "小红书",
+      "url": "https://www.xiaohongshu.com/search_result?keyword={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "xiaohongshu.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "supportAnswerProbe": false,
+      "cardLayout": [
+        "wide-media",
+        "social-media"
+      ],
+      "pageTextExtractor": {
+        "xiaohongshu.com": {
+          "containers": [
+            "div[class*='round-item']:not([data-round-id*='history-']) div[class*='ai-message']",
+            "div[class*='round-item'] div[class*='ai-message']",
+            "[class*='ai-message']"
+          ],
+          "content": [
+            "div[class*='markdown-block']",
+            "[class*='markdown-block']",
+            "[class*='ai-md-container']"
+          ]
+        }
+      },
+      "dnrEmbedHeaders": true
+    },
+    {
+      "id": "weibo-search",
+      "name": "微博",
+      "url": "https://s.weibo.com/weibo?q={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "s.weibo.com",
+        "weibo.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "supportAnswerProbe": false,
+      "pageTextExtractor": {
+        "s.weibo.com": {
+          "containers": [
+            "div[class*='ai_module']"
+          ],
+          "content": [
+            "[class*='summarize_text_content']"
+          ],
+          "exclude": [
+            "[class*='quoted-auth-child']",
+            "[class*='media-block']"
+          ]
+        }
+      }
+    },
+    {
+      "id": "douyin-search",
+      "name": "抖音",
+      "url": "https://www.douyin.com/search/{query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "www.douyin.com",
+        "douyin.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "supportAnswerProbe": false,
+      "dnrEmbedHeaders": true
+    },
+    {
+      "id": "zhihu-search",
+      "name": "知乎",
+      "url": "https://www.zhihu.com/search?type=content&q={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "www.zhihu.com",
+        "zhihu.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "supportAnswerProbe": false,
+      "cardLayout": [
+        "social-media"
+      ],
+      "dnrEmbedHeaders": true
+    },
+    {
+      "id": "douban-group-search",
+      "name": "豆瓣小组",
+      "url": "https://www.douban.com/group/search?cat=1013&q={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "www.douban.com",
+        "douban.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "supportAnswerProbe": false
+    },
+    {
+      "id": "tieba-search",
+      "name": "百度贴吧",
+      "url": "https://tieba.baidu.com/f/search/res?qw={query}",
+      "logoUrl": "https://img30.360buyimg.com/imgzone/jfs/t20271112/538210/20/7705/85784/6ac77e00F65047401/09369c49c40749ec.png",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "tieba.baidu.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "supportAnswerProbe": false
+    },
+    {
+      "id": "hupu-search",
+      "name": "虎扑",
+      "url": "https://bbs.hupu.com/search?q={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "bbs.hupu.com",
+        "hupu.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "supportAnswerProbe": false
+    },
+    {
+      "id": "github-search",
+      "name": "GitHub",
+      "url": "https://github.com/search?q={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "github.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "supportAnswerProbe": false
+    },
+    {
+      "id": "sogou-weixin-search",
+      "name": "搜狗微信",
+      "url": "https://weixin.sogou.com/weixin?ie=utf8&s_from=input&_sug_=n&_sug_type_=1&type=2&query={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "weixin.sogou.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "supportAnswerProbe": false
+    },
+    {
+      "id": "baidu-search",
+      "name": "百度",
+      "url": "https://www.baidu.com/s?wd={query}",
+      "enabled": true,
+      "supportIframe": false,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "www.baidu.com"
+      ],
+      "notes": "百度只能以新标签页模式打开",
+      "uploadSupported": false,
+      "supportAnswerProbe": false
+    },
+    {
+      "id": "toutiao-search",
+      "name": "头条搜索",
+      "url": "https://so.toutiao.com/search?dvpf=pc&keyword={query}",
+      "enabled": true,
+      "supportIframe": false,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "so.toutiao.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "supportAnswerProbe": false
+    },
+    {
+      "id": "bing-search",
+      "name": "必应",
+      "url": "https://cn.bing.com/search?q={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "bing.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "supportAnswerProbe": false
+    },
+    {
+      "id": "quark-search",
+      "name": "夸克",
+      "url": "https://quark.sm.cn/s?q={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "quark.sm.cn"
+      ],
+      "notes": "偶尔会触发人机验证",
+      "uploadSupported": false,
+      "supportAnswerProbe": false
+    },
+    {
+      "id": "so-search",
+      "name": "360搜索",
+      "url": "https://www.so.com/s?q={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "www.so.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "supportAnswerProbe": false
+    },
+    {
+      "id": "google-search",
+      "name": "谷歌",
+      "url": "https://www.google.com/search?q={query}",
+      "enabled": true,
+      "supportIframe": false,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "www.google.com"
+      ],
+      "notes": "谷歌在国内无法直连（被墙），且只能以新标签页模式打开，请自备网络环境",
+      "blocked": true,
+      "uploadSupported": false,
+      "supportAnswerProbe": false
+    },
+    {
+      "id": "yandex-search",
+      "name": "Yandex",
+      "url": "https://yandex.com/search/?text={query}",
+      "enabled": true,
+      "supportIframe": false,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "yandex.com"
+      ],
+      "notes": "非常容易触发人机验证",
+      "uploadSupported": false,
+      "supportAnswerProbe": false
+    },
+    {
+      "id": "metaso-ai-search",
+      "name": "秘塔AI搜索",
+      "url": "https://metaso.cn/?q={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "metaso.cn"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "batchFollowUpSupported": true,
+      "followUpInputSelectors": [
+        "textarea[placeholder*='请输入您的问题']"
+      ],
+      "stopButtonSelectors": [
+        "div[class*='w-[7px]'][class*='h-[7px]'][class*='rounded-[50%]']",
+        "button[data-testid='ChatInputBox.IconButton.detail'][aria-label='停止生成']",
+        "button[aria-label='停止生成']",
+        "button[aria-label*='停止']",
+        "button[aria-label*='Stop']",
+        "button[data-testid*='stop']",
+        "button[title*='停止']"
+      ],
+      "supportAiSummary": true,
+      "extractor": {
+        "userSelector": [
+          "[data-testid^='_ResultTitle.span.']"
+        ],
+        "assistantSelector": [
+          "div[data-testid^='SearchResultContent.div.']"
+        ],
+        "aiTextSelectors": [
+          "div.markdown-body",
+          "[class*='markdown-body']"
+        ]
+      },
+      "pageTextExtractor": {
+        "metaso.cn": {
+          "containers": [
+            "div[data-testid^='SearchResultContent.div.']",
+            "[data-testid^='SearchResultContent.div.']"
+          ],
+          "content": [
+            "div.markdown-body",
+            "[class*='markdown-body']"
+          ]
+        }
+      },
+      "sidebarHandler": {
+        "close": [
+          {
+            "action": "clickIfText",
+            "description": "【与 metaso-research 同 host（metaso.cn）同一页面，策略直接抄自它、随其一起维护】收起侧边栏：点左侧栏折叠钮。🔴 该站两态用的是**两颗不同 testid 的钮**（互斥、可并列进选择器列表）：展开态 button[data-testid=HeaderAction.CircleStyledIconButton.0]（HeaderAction.IconButton.* 在展开态完全不存在）、收起态 button[data-testid=HeaderAction.IconButton.2]（含 LeftMenu_collapse-icon 面板图标）。达成判据 = 侧栏容器 div#left-menu 出现 LeftMenu_collapse* 类（站点自己的 CSS Module 状态类；展开态无该子串，展开态那处 collapse 是另一个组件 search-kits_collapse）。点击方式 = 单发 click（靶子是 button，MUI ButtonBase 走 click）；不加首步 waitForSelector；短超时 3000/600（抖动上限 4 次）。",
+            "selectors": [
+              "[data-testid='HeaderAction.CircleStyledIconButton.0']",
+              "[data-testid='HeaderAction.IconButton.2']"
+            ],
+            "texts": [],
+            "usePointerEvents": false,
+            "verifySelectors": [
+              "#left-menu[class*='LeftMenu_collapse']"
+            ],
+            "timeout": 3000,
+            "interval": 600,
+            "waitAfter": 300,
+            "optional": true
+          }
+        ],
+        "open": [
+          {
+            "action": "clickIfText",
+            "description": "【与 metaso-research 同 host（metaso.cn）同一页面，策略直接抄自它、随其一起维护】展开侧边栏：点同一对折叠钮（哪颗在就点哪颗）。达成判据 = div#left-menu 在且不含 LeftMenu_collapse 类。",
+            "selectors": [
+              "[data-testid='HeaderAction.CircleStyledIconButton.0']",
+              "[data-testid='HeaderAction.IconButton.2']"
+            ],
+            "texts": [],
+            "usePointerEvents": false,
+            "verifySelectors": [
+              "#left-menu:not([class*='LeftMenu_collapse'])"
+            ],
+            "timeout": 3000,
+            "interval": 600,
+            "waitAfter": 300,
+            "optional": true
+          }
+        ]
+      },
+      "dnrEmbedHeaders": true
+    },
+    {
+      "id": "wenxin-ai-search",
+      "name": "百度AI搜索",
+      "url": "https://wenxin.baidu.com/search?word={query}",
+      "logoUrl": "https://img30.360buyimg.com/imgzone/jfs/t20271112/535287/33/10799/4842/6ac78709F51edf0b8/093603f03f759a3e.png",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "wenxin.baidu.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "batchFollowUpSupported": true,
+      "followUpInputSelectors": [
+        "#chat-textarea"
+      ],
+      "stopButtonSelectors": [
+        "img.ci-submit-pause",
+        ".ci-submit-pause",
+        "button[aria-label*='Stop']",
+        "button[aria-label*='停止']",
+        "button[data-testid*='stop']",
+        "button[title*='停止']"
+      ],
+      "supportAiSummary": true,
+      "extractor": {
+        "userSelector": [
+          "[class*='cs-question-pure-text']"
+        ],
+        "assistantSelector": [
+          "[class*='ai-markdown']"
+        ],
+        "aiTextSelectors": [
+          "[class*='marklang']",
+          "[class*='cosd-markdown-content']"
+        ]
+      },
+      "pageTextExtractor": {
+        "wenxin.baidu.com": {
+          "containers": [
+            "div[class*='chat-qa-container']"
+          ],
+          "content": [
+            "[class*='ai-markdown'] [class*='marklang']",
+            "[class*='marklang']",
+            "[class*='cosd-markdown-content']"
+          ]
+        },
+        "chat.baidu.com": {
+          "containers": [
+            "div[class*='chat-qa-container']"
+          ],
+          "content": [
+            "[class*='ai-markdown'] [class*='marklang']",
+            "[class*='marklang']",
+            "[class*='cosd-markdown-content']"
+          ]
+        }
+      }
+    },
+    {
+      "id": "so-ai-search",
+      "name": "360AI搜索",
+      "url": "https://ai.so.com/search/?src=&search={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "ai.so.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "batchFollowUpSupported": true,
+      "stopButtonSelectors": [
+        "button[aria-label='停止生成']",
+        "button[aria-label*='停止']"
+      ],
+      "supportAiSummary": true,
+      "extractor": {
+        "userSelector": [
+          "[data-role='user']"
+        ],
+        "assistantSelector": [
+          "[data-role='assistant']"
+        ],
+        "aiTextSelectors": [
+          ".x-markdown",
+          "[class*='aibox-markdown']"
+        ],
+        "exclude": [
+          "[class*='table_toolbar']",
+          ".underline_wrap"
+        ]
+      },
+      "pageTextExtractor": {
+        "ai.so.com": {
+          "containers": [
+            "[data-role='assistant']"
+          ],
+          "content": [
+            ".x-markdown",
+            "[class*='aibox-markdown']"
+          ],
+          "exclude": [
+            "[class*='table_toolbar']",
+            ".underline_wrap"
+          ]
+        }
+      },
+      "sidebarHandler": {
+        "close": [
+          {
+            "action": "clickIfText",
+            "description": "收起侧边栏：点侧栏头部那颗 icon-btn（button[aria-label=收起侧边栏]，内含 i.ai-so-sidebar-header__collapsed-btn；**两态同款同标签 = 单颗 toggle**，故用 aria-label 定位、图标类作后备）。达成判据 = 侧栏根元素出现 exact token collapsed（div.ai-so-sidebar.collapsed；🔴 必须用 ~= 精确 token——切换钮里那颗图标是复合词 ai-so-sidebar-header__collapsed-btn，用类名子串匹配会误命中它、两态都真）。不加首步 waitForSelector；短超时 3000/600（抖动上限 4 次）。",
+            "selectors": [
+              "button[aria-label='收起侧边栏']",
+              ".ai-so-sidebar-header__collapsed-btn"
+            ],
+            "texts": [],
+            "usePointerEvents": false,
+            "verifySelectors": [
+              ".ai-so-sidebar[class~='collapsed']"
+            ],
+            "timeout": 3000,
+            "interval": 600,
+            "waitAfter": 300,
+            "optional": true
+          }
+        ],
+        "open": [
+          {
+            "action": "clickIfText",
+            "description": "展开侧边栏：点同一颗 toggle。达成判据 = .ai-so-sidebar 在且不含 exact token collapsed。",
+            "selectors": [
+              "button[aria-label='收起侧边栏']",
+              ".ai-so-sidebar-header__collapsed-btn"
+            ],
+            "texts": [],
+            "usePointerEvents": false,
+            "verifySelectors": [
+              ".ai-so-sidebar:not([class~='collapsed'])"
+            ],
+            "timeout": 3000,
+            "interval": 600,
+            "waitAfter": 300,
+            "optional": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "weibo-ai-search",
+      "name": "微博智搜",
+      "url": "https://s.weibo.com/aisearch?q={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "s.weibo.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "batchFollowUpSupported": true,
+      "doneButtonSelectors": [
+        ".trust_box"
+      ],
+      "supportAiSummary": true,
+      "extractor": {
+        "userSelector": [
+          "[class*='query_text_wrap']"
+        ],
+        "assistantSelector": [
+          "[class*='summarize_text_content']"
+        ]
+      },
+      "pageTextExtractor": {
+        "s.weibo.com": {
+          "containers": [
+            "div[class*='ai_module']"
+          ],
+          "content": [
+            "[class*='summarize_text_content']"
+          ],
+          "exclude": [
+            "[class*='quoted-auth-child']",
+            "[class*='media-block']"
+          ]
+        }
+      }
+    },
+    {
+      "id": "zhida-ai-search",
+      "name": "知乎直答",
+      "url": "https://zhida.zhihu.com/search?q={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "zhida.zhihu.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "batchFollowUpSupported": true,
+      "followUpSearchHandler": {
+        "steps": [
+          {
+            "action": "focus",
+            "selectors": [
+              "div.public-DraftEditor-content",
+              "div[contenteditable='true']",
+              "textarea"
+            ],
+            "timeout": 10000,
+            "description": "追问：聚焦输入框"
+          },
+          {
+            "action": "setValue",
+            "selectors": [
+              "div.public-DraftEditor-content",
+              "div[contenteditable='true']",
+              "textarea"
+            ],
+            "inputType": "execCommand",
+            "description": "追问：写入问题（伪 Draft 引擎，必须 execCommand）",
+            "waitAfter": 700
+          },
+          {
+            "action": "smartSubmit",
+            "selectors": [
+              "div.public-DraftEditor-content",
+              "textarea"
+            ],
+            "optional": true,
+            "description": "追问：点发送"
+          },
+          {
+            "action": "sendKeys",
+            "selectors": [
+              "div.public-DraftEditor-content",
+              "textarea"
+            ],
+            "keys": [
+              "Enter"
+            ],
+            "optional": true,
+            "description": "追问：回车发送"
+          }
+        ]
+      },
+      "stopButtonSelectors": [
+        "div[style*='width: 8px'][style*='border-radius: 2px']",
+        "div[style*='width: 8px'][style*='background-color: rgb(90, 77, 248)']",
+        "button[aria-label*='Stop']",
+        "button[aria-label*='停止']",
+        "button[data-testid*='stop']",
+        "button[title*='停止']"
+      ],
+      "supportAiSummary": true,
+      "extractor": {
+        "userSelector": [
+          "div[style*='rgba(90, 77, 248, 0.15)']"
+        ],
+        "assistantSelector": [
+          "div[data-testid='Block:zhida_answer_result_block']"
+        ],
+        "aiTextSelectors": [
+          "div.Render-markdown",
+          "[class*='Render-markdown']"
+        ]
+      },
+      "pageTextExtractor": {
+        "zhida.zhihu.com": {
+          "containers": [
+            "div[data-testid='Block:zhida_answer_result_block']"
+          ],
+          "content": [
+            "div.Render-markdown",
+            "[class*='Render-markdown']"
+          ]
+        }
+      },
+      "dnrEmbedHeaders": true
+    },
+    {
+      "id": "xhs-ai-search",
+      "name": "小红书-点点",
+      "url": "https://www.xiaohongshu.com/ai_chat_tab?searchKeyWord={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "www.xiaohongshu.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "batchFollowUpSupported": true,
+      "stopButtonSelectors": [
+        "svg.spinner.progress-icon",
+        "svg[class*='spinner']"
+      ],
+      "supportAiSummary": true,
+      "extractor": {
+        "userSelector": [
+          ".user-message__text"
+        ],
+        "assistantSelector": [
+          ".ai-message"
+        ],
+        "aiTextSelectors": [
+          ".xhs-ai-md-container"
+        ],
+        "exclude": [
+          "img"
+        ]
+      },
+      "pageTextExtractor": {
+        "xiaohongshu.com": {
+          "containers": [
+            "div[class*='round-item']:not([data-round-id*='history-']) div[class*='ai-message']",
+            "div[class*='round-item'] div[class*='ai-message']",
+            "[class*='ai-message']"
+          ],
+          "content": [
+            "div[class*='markdown-block']",
+            "[class*='markdown-block']",
+            "[class*='ai-md-container']"
+          ]
+        }
+      },
+      "sidebarHandler": {
+        "close": [
+          {
+            "action": "clickIfText",
+            "description": "【同站另一入口（/ai_chat_tab），类名同族、未单独抓档；若该入口结构不同，本链会因找不到靶子而安全空转】收起侧边栏：点侧栏边缘那颗折叠控件——svg[role=button][aria-label=收起侧边栏]（class 为 xhs-ai-history-icon-btn，两态是**同构组件、只有 aria-label 与图标相反**，所以直接用 aria-label 定位，天然单态互斥、零误点）。靶子是 svg（无 .click()）⇒ 执行器会显式补发可冒泡的同形 click，处理器挂 svg 或任意祖先都能接住。达成判据 = 出现收起态专属的 xhs-ai-history-collapsed 容器（展开态对应标记是 left-panel-expanded，两者实测互斥）。不加首步 waitForSelector；短超时 3000/600（抖动上限 4 次）。",
+            "selectors": [
+              "svg[aria-label='收起侧边栏']"
+            ],
+            "texts": [],
+            "usePointerEvents": false,
+            "verifySelectors": [
+              "[class*='xhs-ai-history-collapsed']"
+            ],
+            "timeout": 3000,
+            "interval": 600,
+            "waitAfter": 300,
+            "optional": true
+          }
+        ],
+        "open": [
+          {
+            "action": "clickIfText",
+            "description": "【同站另一入口（/ai_chat_tab），类名同族、未单独抓档；若该入口结构不同，本链会因找不到靶子而安全空转】展开侧边栏：点收起态那颗「展开侧边栏」控件（同为 svg[role=button]，仅 aria-label/图标相反）。达成判据 = 出现 left-panel-expanded。",
+            "selectors": [
+              "svg[aria-label='展开侧边栏']"
+            ],
+            "texts": [],
+            "usePointerEvents": false,
+            "verifySelectors": [
+              "[class*='left-panel-expanded']"
+            ],
+            "timeout": 3000,
+            "interval": 600,
+            "waitAfter": 300,
+            "optional": true
+          }
+        ]
+      },
+      "cardLayout": [
+        "wide-media",
+        "social-media"
+      ],
+      "dnrEmbedHeaders": true
+    },
+    {
+      "id": "sogou-ai-search",
+      "name": "搜狗AI搜索",
+      "url": "https://www.sogou.com/iaimode/search?&gn=1&query={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "sogou.com",
+        "www.sogou.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "batchFollowUpSupported": true,
+      "followUpInputSelectors": [
+        "textarea[placeholder*='输入问题或任务']"
+      ],
+      "supportAiSummary": true,
+      "stopButtonSelectors": [
+        "button[aria-label='停止生成']"
+      ],
+      "extractor": {
+        "userSelector": [
+          "[class*='user-input-bubble-text']"
+        ],
+        "assistantSelector": [
+          "[data-content-block='true']"
+        ],
+        "aiTextSelectors": [
+          "[class*='chatAnswer']"
+        ]
+      },
+      "pageTextExtractor": {
+        "sogou.com": {
+          "containers": [
+            "[data-content-block='true']"
+          ],
+          "content": [
+            "[class*='chatAnswer']"
+          ]
+        }
+      }
+    },
+    {
+      "id": "douyin-ai-search",
+      "name": "抖音AI搜索",
+      "url": "https://so.douyin.com/s?pd=ai_search&keyword={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "so.douyin.com",
+        "douyin.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "batchFollowUpSupported": true,
+      "followUpInputSelectors": [
+        "#textarea_ai_search",
+        "textarea[placeholder*='随便提问']"
+      ],
+      "supportAiSummary": true,
+      "stopButtonSelectors": [
+        "[data-testid='indicator'][class*='flashing']",
+        "[data-testid='indicator']"
+      ],
+      "extractor": {
+        "userSelector": [
+          "[data-cardname='ai_chat_bubble']"
+        ],
+        "assistantSelector": [
+          "[data-cardname='search_ai_card/index-v2']"
+        ],
+        "aiTextSelectors": [
+          "#search-markdown",
+          ".flow-markdown-body"
+        ],
+        "exclude": [
+          "[id='search-markdown-thinking']"
+        ]
+      },
+      "pageTextExtractor": {
+        "so.douyin.com": {
+          "containers": [
+            "[id='search-markdown']"
+          ],
+          "content": [
+            "div[class*='flow-markdown-body']",
+            "[class*='markdown-body']"
+          ],
+          "exclude": [
+            "[id='search-markdown-thinking']"
+          ]
+        }
+      },
+      "dnrEmbedHeaders": true
+    },
+    {
+      "id": "jike-search",
+      "name": "即刻",
+      "url": "https://web.okjike.com/search?q={query}",
+      "enabled": true,
+      "supportIframe": true,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "web.okjike.com",
+        "okjike.com"
+      ],
+      "notes": "",
+      "uploadSupported": false,
+      "supportAnswerProbe": false
+    },
+    {
+      "id": "x-search",
+      "name": "X",
+      "url": "https://x.com/search?q={query}",
+      "enabled": true,
+      "supportIframe": false,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "x.com",
+        "www.x.com"
+      ],
+      "notes": "X（推特）在国内无法直连（被墙），且只能以新标签页模式打开，请自备网络环境",
+      "blocked": true,
+      "uploadSupported": false,
+      "supportAnswerProbe": false,
+      "framebustGuard": true,
+      "dnrEmbedHeaders": true
+    },
+    {
+      "id": "facebook-search",
+      "name": "Facebook",
+      "url": "https://www.facebook.com/search?q={query}",
+      "enabled": true,
+      "supportIframe": false,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "www.facebook.com",
+        "facebook.com"
+      ],
+      "notes": "Facebook 在国内无法直连（被墙），且只能以新标签页模式打开，请自备网络环境",
+      "blocked": true,
+      "uploadSupported": false,
+      "supportAnswerProbe": false
+    },
+    {
+      "id": "instagram-search",
+      "name": "Instagram",
+      "url": "https://www.instagram.com/explore/tags/{query}",
+      "enabled": true,
+      "supportIframe": false,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "www.instagram.com",
+        "instagram.com"
+      ],
+      "notes": "Instagram 在国内无法直连（被墙），本组里它以新标签页打开，需要自备网络环境",
+      "blocked": true,
+      "uploadSupported": false,
+      "supportAnswerProbe": false
+    },
+    {
+      "id": "youtube-search",
+      "name": "YouTube",
+      "url": "https://www.youtube.com/results?search_query={query}",
+      "enabled": true,
+      "supportIframe": false,
+      "supportUrlQuery": true,
+      "matchPatterns": [
+        "www.youtube.com",
+        "youtube.com"
+      ],
+      "notes": "YouTube 在国内无法直连（被墙），且只能以新标签页模式打开，请自备网络环境",
+      "blocked": true,
+      "uploadSupported": false,
+      "supportAnswerProbe": false,
+      "framebustGuard": true,
+      "dnrEmbedHeaders": true
+    }
+  ]
+}

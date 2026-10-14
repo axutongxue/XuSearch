@@ -1,0 +1,87 @@
+
+
+.free-tier-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px;
+  padding: 7px 12px;
+  border: 1px solid rgba(0, 87, 255, 0.22);
+  border-radius: var(--card-radius, 12px);
+  
+  background: #edf3ff;
+  font-size: 12px;
+  line-height: 1.5;
+  color: inherit;
+  
+  pointer-events: auto;
+}
+
+.free-tier-banner-text {
+  flex: 1 1 auto;
+  opacity: 0.85;
+}
+
+.free-tier-banner-cta {
+  flex: 0 0 auto;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #0057ff;
+  color: #fff;
+  font-size: 12px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.free-tier-banner-cta:hover {
+  background: #004ad9;
+}
+
+.free-tier-banner-close {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font-size: 15px;
+  line-height: 1;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.free-tier-banner-close:hover {
+  opacity: 0.9;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+html[data-theme="dark"] .free-tier-banner {
+  border-color: rgba(10, 132, 255, 0.3);
+  
+  background: #162536;
+}
+
+
+.free-tier-banner.is-member-expired {
+  border-color: rgba(220, 38, 38, 0.28);
+  background: #fdf0ef;
+}
+
+.free-tier-banner.is-member-expired .free-tier-banner-cta {
+  border: none;
+  cursor: pointer;
+  background: #dc2626;
+}
+
+.free-tier-banner.is-member-expired .free-tier-banner-cta:hover {
+  background: #b91c1c;
+}
+
+html[data-theme="dark"] .free-tier-banner.is-member-expired {
+  border-color: rgba(248, 113, 113, 0.35);
+  background: #361a1a;
+}

@@ -1,0 +1,15 @@
+
+.xuSearch-preview-shell {
+  position: fixed;
+  z-index: 2147483647;
+  display: none;
+  pointer-events: none;
+}
+.xuSearch-preview-shell:not([hidden]) {
+  display: block;
+  pointer-events: auto;
+}
+
+.xuSearch-preview-card {
+  position: relative;
+}

@@ -1,0 +1,8 @@
+{
+  "note": "DNR 嵌入改写的孤儿域名（2026-10-13 阿虚定案：从站点表的假条目拆出，避免用假站挂真域名）。\n真实搜索站自己带 dnrEmbedHeaders 的不在此列（x-search/youtube-search 等仍走站点表）。\n这里只放「没有可内嵌的真实搜索站」但仍需参与嵌入改写的域名——运行时 dynamic-dnr.js 读它补进 DNR host 集。",
+  "hosts": [
+    "twitter.com",
+    "reddit.com",
+    "tiktok.com"
+  ]
+}

@@ -1,0 +1,304 @@
+
+.cards-panel {
+  height: calc(100vh - 144px);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.iframes-container {
+  display: grid;
+  gap: 14px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+  padding: 6px 24px 12px 0;
+  scroll-behavior: smooth;
+  
+  grid-auto-flow: row;
+  align-content: start;
+  scrollbar-width: thin;
+  scrollbar-color: #aaa transparent;
+}
+
+.iframes-container:focus { outline: none; }
+.iframes-container::-webkit-scrollbar:vertical { width: 10px; }
+.iframes-container::-webkit-scrollbar-thumb:vertical { background: #ccc; border-radius: 999px; }
+.iframes-container::-webkit-scrollbar-track:vertical { background: transparent; }
+
+.iframes-container[data-layout-rows="2"],
+.iframes-container[data-layout-rows="3"] {
+  
+  --card-gap: 14px;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 100%;
+  padding: 0;
+}
+.iframes-container[data-layout-rows="2"] .iframe-card,
+.iframes-container[data-layout-rows="3"] .iframe-card {
+  position: absolute;
+  top: 6px;
+  bottom: 10px;
+  width: calc((100% - var(--card-gap) * (var(--card-cols) - 1)) / var(--card-cols));
+  left: calc(var(--card-x) * ((100% - var(--card-gap) * (var(--card-cols) - 1)) / var(--card-cols) + var(--card-gap)));
+  min-height: 0;
+  height: auto;
+  margin: 0;
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+.iframes-container[data-layout-rows="2"] .iframe-card.is-active-card,
+.iframes-container[data-layout-rows="3"] .iframe-card.is-active-card {
+  opacity: 1;
+  z-index: 2;
+  pointer-events: auto;
+}
+.iframes-container[data-layout-rows="2"] .iframe-card-wide-media,
+.iframes-container[data-layout-rows="3"] .iframe-card-wide-media { width: auto; }
+.iframes-container[data-layout-rows="2"] .ai-iframe,
+.iframes-container[data-layout-rows="3"] .ai-iframe { min-height: 0; height: 100%; }
+
+.iframes-container.is-scroll-guarded {
+  scroll-behavior: auto;
+  overflow-anchor: none;
+}
+
+
+.iframe-card {
+  position: relative;
+  display: grid;
+  grid-template-rows: 32px minmax(0, 1fr);
+  width: auto;
+  min-height: var(--row-height);
+  padding: 0;
+  background: var(--card-surface-strong, #ffffff);
+  border: 1px solid var(--card-border, rgba(17, 17, 17, 0.10));
+  border-radius: var(--card-radius, 16px);
+  overflow: hidden;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+.iframe-card:hover {
+  box-shadow: var(--card-shadow, 0 18px 40px rgba(17, 17, 17, 0.08));
+}
+.iframe-card-wide-media {
+  width: min(var(--wide-media-card-width), calc(100vw - 52px));
+}
+
+
+.iframe-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 4px 8px;
+  position: relative;
+  min-height: 28px;
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(255, 255, 255, 0.98) 100%);
+  border-bottom: 1px solid var(--card-border, rgba(17, 17, 17, 0.10));
+}
+
+.iframe-card-header .site-name {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--card-text, #111);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+  padding-left: 10px;
+}
+
+.iframe-header-status {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: calc(100% - 160px);
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--card-surface-soft, #f5f5f5);
+  color: var(--card-text-muted, #5f5f5f);
+  border: 1px solid var(--card-border, rgba(17, 17, 17, 0.10));
+  box-shadow: var(--card-shadow-sm, 0 6px 18px rgba(17, 17, 17, 0.06));
+  font-size: var(--fs-sm);
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity var(--card-transition, 180ms ease);
+}
+.iframe-header-status.is-hidden {
+  opacity: 0;
+}
+.iframe-header-status.success-text {
+  color: var(--success, #166534);
+}
+
+
+.iframe-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.iframe-controls-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--card-text-muted, #5f5f5f);
+  opacity: 0;
+  transition: opacity var(--card-transition, 180ms ease), color var(--card-transition, 180ms ease), background-color var(--card-transition, 180ms ease);
+}
+.iframe-controls-btn svg {
+  display: block;
+  flex-shrink: 0;
+}
+.iframe-card.is-actions-visible .iframe-controls-btn {
+  opacity: 0.7;
+}
+.iframe-card.is-actions-visible .iframe-controls-btn:hover {
+  opacity: 1;
+  color: var(--card-text, #111);
+  background: var(--card-surface-soft, #f5f5f5);
+}
+
+
+.iframe-controls-btn[data-tooltip] { position: relative; }
+.iframe-controls-btn[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  transform: none;
+  margin-bottom: 6px;
+  padding: 4px 8px;
+  font-size: var(--fs-sm);
+  line-height: 1.35;
+  font-weight: 500;
+  color: #fafafa;
+  background: rgba(0, 0, 0, .92);
+  border-radius: var(--r-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .12s ease, visibility .12s ease;
+  z-index: 30;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .22);
+}
+.iframe-controls-btn:hover::after,
+.iframe-controls-btn:focus-visible::after { opacity: 1; visibility: visible; }
+.iframe-controls-btn:focus-visible {
+  outline: 2px solid var(--card-text, #111);
+  outline-offset: 2px;
+}
+
+
+.iframe-card-body {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--card-surface-strong, #ffffff);
+}
+.ai-iframe {
+  width: 100%;
+  height: 100%;
+  min-height: calc(100vh - 320px);
+  border: none;
+  background: var(--card-surface-strong, #fff);
+}
+.iframes-container[data-layout-rows="2"] .ai-iframe,
+.iframes-container[data-layout-rows="3"] .ai-iframe { min-height: 100%; }
+
+.fallback-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  min-height: 520px;
+  padding: 20px;
+}
+.fallback-panel p { margin: 0; line-height: 1.5; color: var(--text-muted); }
+
+.warning-box {
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--warning-border);
+  background: var(--warning-bg);
+}
+.inline-action-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+  border: 1px dashed var(--border-color);
+  border-radius: var(--r-lg);
+  color: var(--text-muted);
+  background: #e7e7e7;
+}
+
+
+.iframe-loading-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  background: var(--card-surface-strong, #ffffff);
+  color: var(--card-text-muted, #555);
+  pointer-events: none;
+  transition: opacity var(--card-transition, .18s ease), visibility var(--card-transition, .18s ease);
+}
+.iframe-loading-panel[hidden] {
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+}
+.iframe-loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--card-surface-soft, #e5e5e5);
+  border-top-color: var(--card-text, #111);
+  border-radius: 50%;
+  animation: xuSearch-loading-spin .8s linear infinite;
+}
+.iframe-loading-title { font-size: var(--fs-md); font-weight: 700; color: var(--card-text, #111); }
+.iframe-loading-text { font-size: var(--fs-sm); color: var(--card-text-muted, var(--text-muted)); }
+@keyframes xuSearch-loading-spin { to { transform: rotate(360deg); } }
+
+
+@media (max-width: 1100px) {
+  .iframe-card { padding-left: 10px; padding-right: 10px; }
+}
+@media (max-width: 900px) {
+  .cards-panel { height: calc(100vh - 150px); }
+  .app-shell { height: 100vh; padding: 18px 24px 0; }
+  .iframe-card { padding: 8px 6px 10px; }
+  .ai-iframe { min-height: calc(100vh - 352px); }
+}

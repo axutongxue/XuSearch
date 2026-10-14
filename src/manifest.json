@@ -1,0 +1,142 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extensionName__",
+  "version": "1.0.0",
+  "description": "__MSG_extensionDescription__",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAptQ4mneADlcIy5cW53rOFro/V6pkjqltZa4cFe5fUWmsZqXO0A1K+B5o1LNp+/c2FS+/WkxEng7JoH+oxSOERXGM61TuzG6/dHYXyzzahw1Mwhimjaehl8QBuE3HOwsbwp+EE/DsFlcKGAIa9qXfolq3tNZwF1Dqnts4W1+lmaaqPzLJsaHXO/twM3LcLHZQHg7pPGqRBfZD0NGHedonRFtFjml6VR3dT9tHcbJ6T+mjtjG8qjiy4Q0w98JFV8eii68VCKj8HvHMQQcj0acu17vsevzCz+q4VbGQm4BxaFWqCqsA4pjzkwrjADyZHSvl/6JMZKNoNBYVQdsWttah2QIDAQAB",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "windows",
+    "alarms",
+    "declarativeNetRequest",
+    "contextMenus",
+    "favicon"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; frame-src https: http:; img-src 'self' chrome-extension: data: blob:; connect-src https:;"
+  },
+  "offline_enabled": true,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "XuSearch",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_popup": "popup/popup.html"
+  },
+  "commands": {
+    "search-popup-hotkey": {
+      "suggested_key": {
+        "default": "Ctrl+Q"
+      },
+      "description": "打开搜索弹窗（受设置页「全局搜索」开关控制）"
+    },
+    "open-popup": {
+      "suggested_key": {
+        "default": "Alt+Shift+X"
+      },
+      "description": "内置快捷键请勿修改（默认 Alt + Shift + X ）"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://chrome.google.com/webstore/*",
+        "https://chromewebstore.google.com/*",
+        "https://microsoftedge.microsoft.com/addons/*"
+      ],
+      "js": [
+        "config/baseConfig.js",
+        "iframe/inject.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://chrome.google.com/webstore/*",
+        "https://chromewebstore.google.com/*",
+        "https://microsoftedge.microsoft.com/addons/*"
+      ],
+      "js": [
+        "iframe/iframe-anti-detect.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_origin_as_fallback": true,
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://chrome.google.com/webstore/*",
+        "https://chromewebstore.google.com/*",
+        "https://microsoftedge.microsoft.com/addons/*"
+      ],
+      "js": [
+        "iframe/upload-monitor-main.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://chrome.google.com/webstore/*",
+        "https://chromewebstore.google.com/*",
+        "https://microsoftedge.microsoft.com/addons/*"
+      ],
+      "js": [
+        "iframe/framebust-guard.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "popup/logo.png",
+        "config/siteHandlers.json",
+        "config/embed-hosts.json",
+        "config/initialState.zh-CN.json",
+        "config/initialState.en.json",
+        "config/memberSite.json"
+      ],
+      "matches": [
+        "<all_urls>",
+        "chrome-extension://*/*"
+      ]
+    }
+  ],
+  "minimum_chrome_version": "111"
+}

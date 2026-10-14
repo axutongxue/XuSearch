@@ -1,0 +1,69 @@
+# Tool/editor generated metadata
+_metadata/
+.claude/
+.cursor/
+.playwright-mcp/
+codex-backups/
+baidu-test.png
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# Dependency directories
+node_modules/
+
+# Build outputs
+dist/
+dist-store/
+dist-fc/
+.dist-staging/
+.dist-store-staging/
+build/
+
+# Test artifacts
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Desktop generated native host launcher/manifest (local install)
+desktop/run-native-host.cmd
+desktop/run-native-host.sh
+desktop/native-host/
+
+# Release packages
+*.zip
+xusearch-*/
+make-zip.cjs
+
+# Experimental modules (local dev only)
+desktop/
+src/desktop/
+
+# Local dev docs (not for public repo)
+PROJECT_CONSTRAINTS.md
+docs/
+.github/
+
+# Local dev tooling & tests (not for public repo)
+tests/
+vitest.config.js
+playwright.config.js
+scripts/check-lines.mjs
+scripts/check-smoke-build.mjs
+scripts/pack-store.mjs
+scripts/zip-dist.py
+edge-baidu.png
+xusearch-2.png
+xusearch-open.png
+xusearch-overlay.png
+
+# ══════ 机密文件（绝不入库）══════
+.env
+.env.*
+*.pem
+*.spki

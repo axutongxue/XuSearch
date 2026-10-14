@@ -1,0 +1,459 @@
+.prompt-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+
+.prompt-card-item {
+  position: relative;
+  padding: 12px 4px;
+  border-bottom: 1px solid #e8e8e8;
+  background: #ffffff;
+}
+
+.prompt-card-item:first-child {
+  border-top: 1px solid #e8e8e8;
+}
+
+.prompt-card-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prompt-card-icon-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.prompt-icon-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: rgba(0, 0, 0, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: color 140ms ease, background 140ms ease;
+}
+
+.prompt-icon-btn:hover {
+  color: rgba(0, 0, 0, 0.85);
+  background: #f0f0f0;
+}
+
+.prompt-preview-wrap {
+  position: relative;
+}
+
+.prompt-preview-popup {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  z-index: 50;
+  width: 320px;
+  max-width: calc(100vw - 40px);
+  padding: 14px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: var(--r-md);
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+  pointer-events: none;
+}
+
+.prompt-preview-popup.is-visible {
+  pointer-events: auto;
+}
+
+.prompt-preview-popup-title {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: #444444;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.prompt-preview-popup-body {
+  font-size: var(--fs-md);
+  line-height: 1.65;
+  color: #666666;
+  white-space: pre-wrap;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.prompt-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.prompt-card-title {
+  font-size: var(--fs-lg);
+  font-weight: 400;
+  line-height: 1.5;
+  color: #111111;
+  flex: 1;
+  min-width: 0;
+}
+
+.prompt-card-content {
+  margin-top: 12px;
+  font-size: var(--fs-lg);
+  line-height: 1.6;
+  color: #000000;
+  white-space: pre-wrap;
+}
+
+.prompt-card-edit-btn {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+
+.prompt-card-item:hover .prompt-card-edit-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.prompt-panel-bottom-add {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.prompt-editor-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.24);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 100;
+}
+
+.prompt-editor-modal {
+  width: min(720px, 100%);
+  background: #ffffff;
+  border-radius: var(--r-lg);
+  padding: 28px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.prompt-editor-title {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #000000;
+  margin-bottom: 4px;
+}
+
+.prompt-editor-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.prompt-editor-main-actions {
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .prompt-settings-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .prompt-groups-sidebar {
+    min-height: auto;
+    border-right: none;
+    border-bottom: 1px solid #e8e8e8;
+    padding-right: 0;
+    padding-bottom: 18px;
+    gap: 16px;
+  }
+
+  .prompt-content-header,
+  .prompt-content-actions,
+  .prompt-editor-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .prompt-group-rename-input {
+    width: 100%;
+  }
+}
+
+.group-drag-handle {
+  right: auto;
+  left: 268px;
+  bottom: -20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transform: none;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px #e5e5e5;
+}
+
+.group-drag-handle-svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+@media (max-width: 760px) {
+  .group-drag-handle {
+    left: auto;
+    right: 14px;
+    bottom: 14px;
+    transform: none;
+    border-radius: var(--r-md);
+  }
+}
+
+.settings-group-card {
+  --group-meta-width: 290px;
+  --group-handle-size: 40px;
+  --group-handle-offset: calc(var(--group-handle-size) / 2);
+  grid-template-columns: var(--group-meta-width) minmax(0, 1fr);
+}
+
+.group-drag-handle {
+  left: calc(var(--group-meta-width) - var(--group-handle-offset));
+  bottom: calc(var(--group-handle-offset) * -1);
+  width: var(--group-handle-size);
+  height: var(--group-handle-size);
+}
+
+@media (max-width: 760px) {
+  .settings-group-card {
+    --group-meta-width: 100%;
+  }
+}
+
+.settings-group-card.is-group-dragging {
+  opacity: 0.7;
+}
+
+.settings-group-card.is-group-drag-over {
+  box-shadow: inset 0 0 0 2px #c5c5c5;
+}
+
+.group-drag-handle {
+  position: absolute;
+  border: 1px solid #dcdcdc;
+  background: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  z-index: 3;
+  box-shadow: 0 0 0 1px #e5e5e5;
+}
+
+.group-drag-handle:active {
+  cursor: grabbing;
+}
+
+.settings-section {
+  gap: 22px;
+}
+
+.settings-group-card {
+  overflow: visible;
+}
+
+.group-delete-corner-btn {
+  top: 14px;
+  left: 14px;
+  z-index: 4;
+}
+
+.group-drag-handle {
+  z-index: 5;
+}
+
+.group-delete-corner-btn {
+  left: auto;
+  right: 14px;
+  top: 14px;
+}
+
+.settings-group-card {
+  --group-handle-inline-offset: 14px;
+}
+
+.group-drag-handle {
+  left: auto;
+  right: var(--group-handle-inline-offset);
+  bottom: calc(var(--group-handle-offset) * -1);
+}
+
+.settings-group-card {
+  --group-corner-inset: 14px;
+  --group-delete-size: 30px;
+  --group-handle-size: 40px;
+}
+
+.group-delete-corner-btn {
+  top: var(--group-corner-inset);
+  right: var(--group-corner-inset);
+}
+
+.group-drag-handle {
+  right: calc(var(--group-corner-inset) - ((var(--group-handle-size) - var(--group-delete-size)) / 2));
+}
+
+.settings-group-card {
+  --group-corner-inset: 14px;
+  --group-delete-size: 30px;
+  --group-handle-size: 30px;
+  --group-handle-bottom-offset: -15px;
+  --group-control-stroke: #d5d5d5;
+  --group-control-icon: #d5d5d5;
+}
+
+.group-delete-corner-btn,
+.group-drag-handle {
+  width: var(--group-delete-size);
+  height: var(--group-delete-size);
+  border-color: var(--group-control-stroke);
+  color: var(--group-control-icon);
+  box-shadow: none;
+}
+
+.group-delete-corner-btn {
+  top: var(--group-corner-inset);
+  right: var(--group-corner-inset);
+}
+
+.group-drag-handle {
+  left: auto;
+  right: var(--group-corner-inset);
+  bottom: var(--group-handle-bottom-offset);
+}
+
+.group-drag-handle-svg {
+  width: 16px;
+  height: 16px;
+}
+
+.group-drag-handle svg path {
+  fill: var(--group-control-icon);
+}
+
+.settings-group-card {
+  --group-control-size: 30px;
+  --group-control-half: calc(var(--group-control-size) / 2);
+  --group-control-stroke: #d5d5d5;
+  --group-control-icon: #d5d5d5;
+}
+
+.group-delete-corner-btn,
+.group-drag-handle {
+  width: var(--group-control-size);
+  height: var(--group-control-size);
+  border: 1px solid var(--group-control-stroke);
+  color: var(--group-control-icon);
+  background: #ffffff;
+  box-shadow: none;
+  border-radius: 50%;
+}
+
+.group-delete-corner-btn {
+  top: calc(var(--group-control-half) * -1);
+  right: calc(var(--group-control-half) * -1);
+}
+
+.group-drag-handle {
+  left: auto;
+  right: calc(var(--group-control-half) * -1);
+  bottom: calc(var(--group-control-half) * -1);
+}
+
+.group-drag-handle-svg {
+  width: 15px;
+  height: 15px;
+}
+
+.group-drag-handle svg path {
+  fill: var(--group-control-icon);
+}
+
+.settings-section {
+  gap: 30px;
+}
+
+.settings-group-card {
+  --group-control-size: 30px;
+  --group-control-half: calc(var(--group-control-size) / 2);
+  --group-control-overhang: 10px;
+  overflow: visible;
+}
+
+.group-delete-corner-btn {
+  top: calc(var(--group-control-overhang) * -1);
+  right: calc(var(--group-control-overhang) * -1);
+}
+
+.group-drag-handle {
+  left: auto;
+  right: calc(var(--group-control-overhang) * -1);
+  bottom: calc(var(--group-control-overhang) * -1);
+}
+
+.settings-group-card {
+  align-items: stretch;
+}
+
+.settings-group-meta {
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+
+.group-name-block {
+  margin: 0;
+}
+
+.group-name-block .field-label {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.group-name-input {
+  text-align: center;
+}
+
+.group-inline-controls-compact {
+  margin-top: 0;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: nowrap;
+}
+
+.inline-switch-row,
+.inline-mode-select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

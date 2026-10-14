@@ -1,0 +1,149 @@
+
+
+
+.btn-gradient-blue {
+  
+  background: linear-gradient(90deg, #0057ff, #87ceeb);
+}
+
+
+.btn-gradient-blue:hover {
+  background: linear-gradient(90deg, #0043cc, #6bc0e8);
+  filter: saturate(1.12);
+}
+
+.btn-gradient-blue:active {
+  transform: scale(0.98);
+  background: linear-gradient(90deg, #0038ab, #57b3e0);
+  filter: saturate(1.18);
+}
+
+
+html[data-theme="dark"] .btn-gradient-blue {
+  
+  background: linear-gradient(90deg, #2450c0, #4f8fda);
+}
+
+html[data-theme="dark"] .btn-gradient-blue:hover {
+  background: linear-gradient(90deg, #2b5fd9, #5da3ff);
+  filter: saturate(1.1);
+}
+
+html[data-theme="dark"] .btn-gradient-blue:active {
+  background: linear-gradient(90deg, #3a72e8, #7cc0ff);
+  filter: saturate(1.16);
+}
+
+
+.membership-entry-btn:not(.is-danger):not(.is-warn),
+.md-cta:not(.is-ghost),
+.membership-btn.is-primary,
+.custom-form-submit-btn,
+.custom-edit-save-btn,
+.desktop-global-cta {
+  height: 34px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #0057ff, #87ceeb);
+  color: #ffffff;
+  font-size: var(--fs-md);
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+
+.md-cta:not(.is-ghost) { width: 100%; }
+
+
+.membership-entry-btn:not(.is-danger):not(.is-warn):hover,
+.md-cta:not(.is-ghost):hover,
+.membership-btn.is-primary:hover,
+.custom-form-submit-btn:hover,
+.custom-edit-save-btn:hover,
+.desktop-global-cta:hover {
+  background: linear-gradient(90deg, #0043cc, #6bc0e8);
+  filter: saturate(1.12);
+}
+
+.membership-entry-btn:not(.is-danger):not(.is-warn):active,
+.md-cta:not(.is-ghost):active,
+.membership-btn.is-primary:active,
+.custom-form-submit-btn:active,
+.custom-edit-save-btn:active,
+.desktop-global-cta:active {
+  transform: scale(0.98);
+  background: linear-gradient(90deg, #0038ab, #57b3e0);
+  filter: saturate(1.18);
+}
+
+html[data-theme="dark"] .membership-entry-btn:not(.is-danger):not(.is-warn),
+html[data-theme="dark"] .md-cta:not(.is-ghost),
+html[data-theme="dark"] .membership-btn.is-primary,
+html[data-theme="dark"] .custom-form-submit-btn,
+html[data-theme="dark"] .custom-edit-save-btn,
+html[data-theme="dark"] .desktop-global-cta,
+
+html[data-theme="dark"] .free-api-entry-btn {
+  background: linear-gradient(90deg, #2450c0, #4f8fda);
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .membership-entry-btn:not(.is-danger):not(.is-warn):hover,
+html[data-theme="dark"] .md-cta:not(.is-ghost):hover,
+html[data-theme="dark"] .membership-btn.is-primary:hover,
+html[data-theme="dark"] .custom-form-submit-btn:hover,
+html[data-theme="dark"] .custom-edit-save-btn:hover,
+html[data-theme="dark"] .desktop-global-cta:hover,
+html[data-theme="dark"] .free-api-entry-btn:hover {
+  background: linear-gradient(90deg, #2b5fd9, #5da3ff);
+  filter: saturate(1.1);
+}
+
+html[data-theme="dark"] .membership-entry-btn:not(.is-danger):not(.is-warn):active,
+html[data-theme="dark"] .md-cta:not(.is-ghost):active,
+html[data-theme="dark"] .membership-btn.is-primary:active,
+html[data-theme="dark"] .custom-form-submit-btn:active,
+html[data-theme="dark"] .custom-edit-save-btn:active,
+html[data-theme="dark"] .desktop-global-cta:active,
+html[data-theme="dark"] .free-api-entry-btn:active {
+  background: linear-gradient(90deg, #3a72e8, #7cc0ff);
+  filter: saturate(1.16);
+}
+
+
+.membership-report-btn {
+  border-color: transparent;
+  background: #eaf1ff;
+  color: #0057ff;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.membership-report-btn:hover {
+  border-color: transparent;
+  background: #cfdfff;
+  color: #0046d4;
+}
+
+.membership-report-btn:active {
+  transform: scale(0.98);
+  background: #b9d0ff;
+}
+
+html[data-theme="dark"] .membership-report-btn {
+  border-color: transparent;
+  background: rgba(0, 87, 255, 0.2);
+  color: #66a4ff;
+}
+
+html[data-theme="dark"] .membership-report-btn:hover {
+  border-color: transparent;
+  background: rgba(90, 150, 255, 0.28);
+  color: #a8ccff;
+}
+
+html[data-theme="dark"] .membership-report-btn:active {
+  transform: scale(0.98);
+  background: rgba(90, 150, 255, 0.4);
+}

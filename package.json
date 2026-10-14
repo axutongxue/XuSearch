@@ -1,0 +1,19 @@
+{
+  "name": "xusearch-oss",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs --disable-features=desktop",
+    "build:store": "node build.mjs --features=store --outdir=dist-store",
+    "test": "node test/config-merge.test.mjs && node test/site-catalog.test.mjs && node test/dynamic-dnr.test.mjs && node test/upload-success-marker.test.mjs && node test/paste-target-pick.test.mjs && node test/group-launch-external-sites.test.mjs && node test/page-text-extractor-keys.test.mjs && node test/tab-message-target-frame.test.mjs && node test/upload-summary-counts.test.mjs && node test/claim-site-id.test.mjs && node test/machine-key.test.mjs && node test/bundle-concurrency.test.mjs && node test/site-icon-placeholder.test.mjs && node test/shortcut-parse.test.mjs && node test/free-tier-banner-placement.test.mjs && node test/logo-size-contract.test.mjs && node test/bundle-site-field-merge.test.mjs && node test/store-stub-parity.test.mjs && node test/typed-follow-up.test.mjs && node test/config-io-coverage.test.mjs && node test/external-links-and-cta.test.mjs",
+    "watch": "node build.mjs --watch --disable-features=desktop",
+    "watch:store": "node build.mjs --watch --features=store"
+  },
+  "devDependencies": {
+    "acorn": "^8.19.0",
+    "esbuild": "^0.24.2",
+    "playwright-core": "^1.62.1"
+  },
+  "description": "XuSearch 开源版（不含会员功能与会员站点规则）"
+}

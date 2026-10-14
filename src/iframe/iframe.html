@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="iframe_pageTitle">XuSearch - 虚空搜索</title>
+    <link rel="stylesheet" href="iframe.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <section class="cards-panel">
+        <div id="iframes-container" class="iframes-container" data-columns="1"></div>
+      </section>
+
+      <aside id="siteNavPanel" class="site-nav-panel" hidden>
+        <div class="site-nav-header" data-i18n="iframe_siteNavTitle">AI 模型</div>
+        <div id="siteNavList" class="site-nav-list"></div>
+      </aside>
+
+      
+      <div id="historyPanel" class="export-modal history-modal" role="dialog" aria-modal="true" aria-label="搜索与提问记录" hidden>
+        <div class="export-modal-content history-modal-content">
+          <div class="export-modal-header">
+            <h3 class="export-modal-title" data-i18n="iframe_historyTitle">搜索与提问记录</h3>
+            <button id="closeHistoryPanelBtn" class="export-close-btn" type="button" data-i18n-attr="aria-label:iframe_close" aria-label="关闭"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+          </div>
+          <div class="export-notice" data-i18n="iframe_historyNotice">点击「复原」可新开页面恢复这次搜索会话；删除后不可恢复。点击条目卡片可查看该次搜索的站点。</div>
+          <div class="history-modal-body">
+            
+            <div class="history-filter-row">
+              <div id="historyFilterBar" class="history-filter-bar" role="tablist" aria-label="搜索记录筛选">
+                <button id="historyFilterAllBtn" class="history-filter-btn is-active" type="button" role="tab" aria-selected="true" data-history-filter="all" data-i18n="iframe_historyFilterAll">全部</button>
+                <button id="historyFilterYesterdayBtn" class="history-filter-btn" type="button" role="tab" aria-selected="false" data-history-filter="yesterday" data-i18n="iframe_historyFilterYesterday">昨天</button>
+                <button id="historyFilterBeforeYesterdayBtn" class="history-filter-btn" type="button" role="tab" aria-selected="false" data-history-filter="before-yesterday" data-i18n="iframe_historyFilterBeforeYesterday">前天</button>
+              </div>
+              <div class="history-search">
+                <svg class="history-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+                <input id="historySearchInput" class="history-search-input" type="search" autocomplete="off" spellcheck="false" placeholder="搜索历史记录" data-i18n-attr="placeholder:iframe_historySearchPlaceholder;aria-label:iframe_historySearchPlaceholder" aria-label="搜索历史记录">
+              </div>
+            </div>
+            <div id="historyList" class="history-list"></div>
+          </div>
+          <div class="export-actions history-modal-footer">
+            <button id="clearHistoryBtn" class="export-cancel-btn" type="button" data-i18n="iframe_historyClear">清空记录</button>
+            <button id="closeHistoryFooterBtn" class="export-confirm-btn" type="button" data-i18n="iframe_close">关闭</button>
+          </div>
+        </div>
+      </div>
+
+      <section class="bottom-composer">
+        <span id="globalStatus" class="global-status visually-hidden" data-i18n="iframe_loadingStatus">正在加载站点配置...</span>
+
+        <div id="cardNavRow" class="card-nav-row">
+          <button id="cardNavScrollLeftBtn" class="card-nav-scroll-btn" type="button" data-tooltip="向左滚动标签" data-i18n-attr="aria-label:iframe_cardNavScrollLeft;data-tooltip:iframe_cardNavScrollLeft" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div id="cardNavStrip" class="card-nav-strip"></div>
+          <button id="cardNavScrollRightBtn" class="card-nav-scroll-btn" type="button" data-tooltip="向右滚动标签" data-i18n-attr="aria-label:iframe_cardNavScrollRight;data-tooltip:iframe_cardNavScrollRight" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+
+        <div id="hScrollStrip" class="h-scroll-strip" hidden>
+          <div id="hScrollThumb" class="h-scroll-thumb"></div>
+        </div>
+
+        <div class="bottom-composer-row">
+        <div class="bottom-composer-bar">
+          <div class="composer-input-shell">
+            
+            <div id="promptPicker" class="composer-prompt-picker" hidden></div>
+            <div class="composer-input-row">
+              
+              <textarea
+                id="queryInput"
+                class="bottom-query-input"
+                placeholder="输入问题，或拖拽/粘贴文件以批量上传到所有站点"
+                data-i18n-attr="placeholder:iframe_queryPlaceholder"
+                rows="1"
+              ></textarea>
+            </div>
+
+            <div class="composer-toolbar-row">
+              
+
+              <div class="composer-inline-actions">
+                <button id="aiSummaryBtn" class="composer-inline-icon composer-tooltip-btn" type="button" data-tooltip="AI总结" data-i18n-attr="aria-label:iframe_aiSummaryTooltip;data-tooltip:iframe_aiSummaryTooltip">
+                  <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        
+                        <path d="M770.4576 51.2a144.1792 144.1792 0 0 1 144.128 143.6672l0.768 291.4304a35.328 35.328 0 1 1-70.7072 0.2048l-0.7168-291.4304a73.4208 73.4208 0 0 0-73.472-73.1648l-472.6784 1.1264A73.4208 73.4208 0 0 0 224.256 196.4544v582.0928c0 40.5504 32.8704 73.4208 73.472 73.4208l182.0672-1.0752a35.3792 35.3792 0 0 1 0.1024 70.656H297.7792A143.2576 143.2576 0 0 1 153.6 778.5984l0.0512-582.144a144.1792 144.1792 0 0 1 144.1792-144.128L770.5088 51.2h-0.0512z m-24.5248 530.0736l31.2832 89.3952a40.2432 40.2432 0 0 0 26.8288 26.8288l89.4464 31.3344c8.9088 4.4544 8.9088 13.4144 0 17.8688l-89.4464 31.2832a40.3456 40.3456 0 0 0-26.8288 26.8288l-31.2832 89.3952c-4.5056 8.96-13.4144 8.96-17.8688 0l-31.3344-89.3952a40.3456 40.3456 0 0 0-26.8288-26.8288l-89.4464-31.2832c-8.9088-4.4544-8.9088-13.4144 0-17.92l89.4464-31.232a40.2432 40.2432 0 0 0 26.8288-26.88l31.3344-89.3952c4.4544-8.96 13.3632-8.96 17.8176 0h0.1024z m-192.512-21.4528a35.328 35.328 0 0 1 0 70.7584h-146.944a35.328 35.328 0 0 1 0-70.7584h146.944z m108.7488-163.1744a35.328 35.328 0 0 1 0 70.7072H406.528a35.328 35.328 0 1 1 0-70.7072h255.6416z m0-163.2256a35.328 35.328 0 0 1 0 70.7584H406.528a35.328 35.328 0 1 1 0-70.7584h255.6416z" fill="currentColor"/>
+                      </svg>
+                </button>
+                
+                <div class="composer-prompt-wrap">
+                  <button id="promptAssistBtn" class="composer-inline-icon composer-tooltip-btn" type="button" aria-label="常用提示词" data-tooltip="常用提示词" data-i18n-attr="aria-label:iframe_promptAssist;data-tooltip:iframe_promptAssistTooltip" aria-expanded="false">
+                    
+                    <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M258.446222 127.601778C288.995556 69.006222 366.990222 43.235556 428.259556 84.593778l66.56 44.885333c16.042667 10.808889 29.639111 24.291556 40.618666 39.651556l119.637334-29.866667c42.837333-10.695111 76.970667-19.285333 104.675555-23.608889 27.875556-4.437333 52.906667-5.290667 76.8 2.104889A160.085333 160.085333 0 0 1 926.151111 187.733333c12.970667 21.333333 18.204444 45.852444 20.707556 74.012445 2.446222 27.875556 2.503111 63.146667 2.503111 107.178666V512a32.085333 32.085333 0 0 1-32.028445 31.971556 31.971556 31.971556 0 0 1-31.971555-31.971556V368.924444c0-45.283556-0.056889-77.141333-2.275556-101.546666-2.104889-24.177778-6.087111-37.319111-11.662222-46.535111a96.142222 96.142222 0 0 0-53.703111-41.984c-10.24-3.128889-24.007111-3.811556-48.014222 0-24.234667 3.868444-55.182222 11.548444-99.100445 22.528l-108.942222 27.136c2.332444 10.922667 3.697778 22.186667 3.697778 33.564444v211.114667a32.085333 32.085333 0 0 1-32.028445 31.971555 31.971556 31.971556 0 0 1-31.971555-31.971555v-211.057778a96.028444 96.028444 0 0 0-42.325334-79.530667L392.533333 137.671111a53.418667 53.418667 0 0 0-83.114666 44.145778v532.48c0 9.386667 6.371556 17.521778 15.416889 19.683555l12.458666 3.072a285.240889 285.240889 0 0 1 184.775111 144.042667h1.479111c8.135111-0.739556 16.440889-2.389333 38.172445-6.997333l45.112889-9.386667a31.971556 31.971556 0 1 1 13.084444 62.577778l-44.999111 9.443555c-20.252444 4.266667-32.995556 7.054222-46.08 8.135112a198.087111 198.087111 0 0 1-9.671111 0.512 31.971556 31.971556 0 0 1-33.223111-1.536c-10.24-1.422222-21.276444-3.868444-36.693333-7.111112l-186.538667-39.253333c-28.444444-5.973333-51.655111-10.808889-70.200889-16.213333-19.000889-5.461333-35.384889-12.117333-50.289778-22.641778a159.914667 159.914667 0 0 1-54.272-66.901333c-7.224889-16.725333-10.410667-34.190222-11.832889-53.930667-1.422222-19.342222-1.365333-42.837333-1.365333-72.021333v-374.328889-10.808889a160.085333 160.085333 0 0 1 183.751111-153.031111z m519.623111 469.560889c7.224889-35.498667 58.026667-35.498667 65.251556 0a150.016 150.016 0 0 0 116.906667 116.849777c35.498667 7.281778 35.498667 58.026667 0 65.308445a150.016 150.016 0 0 0-116.906667 116.906667c-7.281778 35.498667-58.026667 35.498667-65.251556 0a150.016 150.016 0 0 0-116.963555-116.906667c-35.441778-7.281778-35.441778-58.026667 0-65.308445a150.129778 150.129778 0 0 0 116.963555-116.849777z m-532.707555-406.755556a95.971556 95.971556 0 0 0-106.609778 92.216889l-0.056889 8.874667v374.328889c0 30.151111 0 50.915556 1.251556 67.299555 1.137778 15.985778 3.356444 25.6 6.656 33.166222 6.940444 16.099556 18.261333 29.980444 32.597333 40.106667 6.769778 4.835556 15.644444 9.045333 31.061333 13.482667 15.815111 4.551111 36.181333 8.874667 65.649778 15.018666l160.426667 33.735111a221.411556 221.411556 0 0 0-114.232889-69.404444l-12.515556-3.015111a84.252444 84.252444 0 0 1-64.284444-81.863111v-523.946667z m565.304889 492.999111a214.186667 214.186667 0 0 1-63.260445 63.260445 214.471111 214.471111 0 0 1 63.260445 63.260444 214.471111 214.471111 0 0 1 63.203555-63.260444 214.243556 214.243556 0 0 1-63.146666-63.260445z" fill="currentColor" stroke="none"></path>
+                    </svg>
+                  </button>
+                </div>
+
+                <button id="fileUploadBtn" class="composer-inline-icon composer-tooltip-btn" type="button" data-tooltip="上传文件" data-i18n-attr="aria-label:iframe_uploadFile;data-tooltip:iframe_uploadFileTooltip">
+                  <svg viewBox="0 0 1024 1024" aria-hidden="true">
+                    <path d="M924.672 126.976q36.864 36.864 54.784 82.432t17.92 93.696-17.92 93.696-54.784 82.432l-392.192 389.12q-36.864 36.864-90.624 61.44t-113.664 28.672-122.368-16.384-115.712-73.728q-52.224-52.224-72.704-113.152t-16.384-121.344 28.16-113.664 60.928-90.112l348.16-345.088q9.216-9.216 27.136-4.608t27.136 13.824q8.192 9.216 13.312 27.136t-4.096 27.136l-347.136 344.064q-27.648 27.648-46.08 64.512t-21.504 78.848 12.288 84.992 55.296 82.944q35.84 35.84 79.36 50.688t86.528 12.288 81.92-18.944 66.56-44.032l391.168-388.096q27.648-27.648 39.424-57.344t11.264-58.88-13.824-56.832-36.864-51.2q-44.032-43.008-98.816-40.448t-110.08 57.856l-353.28 351.232q-23.552 23.552-23.04 52.224t18.944 47.104q22.528 22.528 51.712 18.432t47.616-22.528l320.512-318.464q9.216-9.216 27.136-4.608t27.136 13.824 14.336 27.136-4.096 27.136l-321.536 318.464q-36.864 36.864-70.656 51.2t-63.488 12.8-55.296-15.872-47.104-34.816q-17.408-16.384-31.232-41.984t-15.872-56.32 10.752-65.536 49.664-70.656q18.432-18.432 32.768-33.792 12.288-13.312 23.04-23.552t11.776-11.264l285.696-284.672q36.864-36.864 80.384-57.856t88.576-24.064 88.576 12.288 80.384 52.224z"></path>
+                  </svg>
+                </button>
+                <input type="file" id="fileUploadInput" multiple accept="image/*,.pdf,.txt,.md,.doc,.docx,.csv,.json,.xml" hidden>
+
+                <button id="sendSelectedBtn" class="composer-inline-icon composer-inline-icon-send is-empty" type="button" data-i18n-attr="aria-label:iframe_send">
+                  <svg viewBox="0 0 1024 1024" aria-hidden="true">
+                    <path d="M554.666667 268.8v601.6h-85.333334V268.8L337.066667 401.066667 277.333333 341.333333 512 106.666667 746.666667 341.333333l-59.733334 59.733334L554.666667 268.8z" fill="currentColor"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+        
+              <div id="bottomCornerActions" class="bottom-corner-actions">
+                  <button id="exportBtn" class="corner-action composer-tooltip-btn" type="button" data-tooltip="导出文档" data-i18n-attr="aria-label:iframe_exportDoc;data-tooltip:iframe_exportDoc">
+        <svg viewBox="0 0 1024 1024" aria-hidden="true" style="width: 15px;">
+                        <path d="M750.952139 1023.999132H195.742046A156.152839 156.152839 0 0 1 39.589207 859.171136V173.833678A173.503154 173.503154 0 0 1 74.289838 52.38147 182.178312 182.178312 0 0 1 213.092361 0.330524h485.808831l34.700631 17.350315 164.827996 190.853469a43.375789 43.375789 0 0 1 17.350316 34.700631v52.050946a52.050946 52.050946 0 0 1-43.375789 43.375789 43.375789 43.375789 0 0 1-43.375788-43.375789V260.585255L681.550877 87.082101H213.092361a86.751577 86.751577 0 0 0-69.401262 26.025473A104.101892 104.101892 0 0 0 126.340784 173.833678v685.337458c0 78.076419 60.726104 78.076419 69.401262 78.076419h555.210093a86.751577 86.751577 0 0 0 86.751577-69.401261 43.375789 43.375789 0 0 1 52.050946-26.025473c26.025473 0 34.700631 26.025473 34.700631 52.050946a190.853469 190.853469 0 0 1-173.503154 130.127365z" fill="currentColor"></path>
+                        <path d="M933.13045 624.941878H438.646461a43.375789 43.375789 0 0 1-43.375788-43.375788 43.375789 43.375789 0 0 1 43.375788-43.375789h399.057255l-78.07642-78.076419c-8.675158-17.350315-8.675158-52.050946 8.675158-60.726104a43.375789 43.375789 0 0 1 60.726104 0l138.802523 156.152839a26.025473 26.025473 0 0 1 8.675158 43.375788 43.375789 43.375789 0 0 1-43.375789 26.025473z" fill="currentColor"></path>
+                        <path d="M785.652769 763.744401h-34.70063a34.700631 34.700631 0 0 1 8.675157-69.401261L907.104977 555.540617a43.375789 43.375789 0 0 1 60.726104 60.726103L811.678242 755.069244z" fill="currentColor"></path>
+                      </svg>
+      </button>
+                  <button id="historyToggleBtn" class="corner-action composer-tooltip-btn" type="button" data-tooltip="历史记录" data-i18n-attr="aria-label:iframe_historySearchAria;data-tooltip:iframe_historySearchAria">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                          <path d="M12 8v4l2 2"></path>
+                          <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"></path>
+                        </g>
+                      </svg>
+      </button>
+                  
+                  <div class="layout-menu-wrap">
+                    <button id="layoutToggleBtn" class="corner-action composer-tooltip-btn" type="button" data-tooltip="布局调整" data-i18n-attr="aria-label:iframe_layoutSettings;data-tooltip:iframe_layoutSettings">
+        <svg viewBox="0 0 1024 1024" stroke="currentColor" stroke-width="26" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M169 169v686h686V169H169z m640 46v146H215V215h594zM215 407h145.8v402H215V407z m191.8 402V407H809v402H406.8z" fill="currentColor"></path>
+                        </svg>
+      </button>
+                    <div id="layoutPopover" class="layout-popover" hidden>
+                      <div class="layout-option-group">
+                        <div class="layout-option-title" data-i18n="iframe_layoutDisplayTitle">呈现形式</div>
+                        <div class="layout-option-row">
+                          <button class="layout-option-btn" type="button" data-layout-rows="1" data-i18n="iframe_layoutRows1">1排</button>
+                          <button class="layout-option-btn" type="button" data-layout-rows="2" data-i18n="iframe_layoutRows2">2排</button>
+                          <button class="layout-option-btn" type="button" data-layout-rows="3" data-i18n="iframe_layoutRows3">3排</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+                  <button id="settingsBtn" class="corner-action composer-tooltip-btn" type="button" data-tooltip="打开设置" data-i18n-attr="aria-label:iframe_openSettings;data-tooltip:iframe_openSettings">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button></div>
+      </section>
+    </div>
+
+    <script src="../config/baseConfig.js"></script>
+    <script src="../shared/i18n.js"></script>
+    <script src="../shared/prompt-item.js"></script>
+    <script src="iframe.js"></script>
+  </body>
+</html>

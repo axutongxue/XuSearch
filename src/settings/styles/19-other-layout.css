@@ -1,0 +1,312 @@
+
+
+
+.other-sec {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--r-lg);
+  padding: 20px 22px;
+}
+
+.other-sec + .other-sec {
+  margin-top: 18px;
+}
+
+
+.other-sec.is-off {
+  filter: grayscale(1) opacity(.58);
+}
+
+.other-sec.is-off:hover {
+  filter: grayscale(1) opacity(.8);
+}
+
+.other-sec-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 32px;
+}
+
+
+.other-sec-head h2 {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  line-height: 1.4;
+  color: #17181a;
+}
+
+.other-sec-badge {
+  flex: none;
+  padding: 4px 9px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1;
+  background: #f2f2f3;
+  color: #86868b;
+}
+
+.other-sec-badge.is-on {
+  background: #ecfdf3;
+  color: #1a9e4f;
+  border-color: #c6f0d8;
+}
+
+.other-sec-badge.is-count {
+  background: #f0f5ff;
+  color: #0057ff;
+  border-color: #d6e4ff;
+}
+
+
+.other-sec-switch {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+.other-sec-sub {
+  margin: 6px 0px 6px 0px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #6b7280;
+}
+
+.other-sec-body {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.other-sec .other-setting-row {
+  border: none;
+  border-radius: 0;
+  background: none;
+  gap: 18px;
+  padding: 15px 0;
+  border-bottom: 1px dashed #e5e7eb;
+}
+
+.other-sec .other-setting-row:first-child {
+  padding-top: 10px;
+}
+
+.other-sec .other-setting-row:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+
+.other-sec .other-setting-glyph {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #eef4ff;
+  color: #2b5fd9;
+}
+
+.other-sec .other-setting-glyph svg {
+  width: 16px;
+  height: 16px;
+}
+
+
+.other-sec .other-setting-row-stack {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+
+.other-sec .other-setting-row--with-tip {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+
+.other-sec .other-setting-title {
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.other-sec .other-setting-copy {
+  gap: 0;
+}
+
+.other-sec .other-setting-desc {
+  margin-top: 3px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #6b7280;
+}
+
+
+.other-sec .shortcut-tip {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #a16207;
+}
+
+
+.other-sub-block {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed #ececec;
+}
+
+.other-sub-head {
+  margin: 0;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: #17181a;
+}
+
+
+.shortcut-keys {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+
+.shortcut-readonly {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+  margin-left: 14px;
+}
+
+.shortcut-row-actions {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+}
+
+
+.shortcut-open-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 16px;
+  border: none; 
+  border-radius: 9px;
+  background: linear-gradient(90deg, #0057ff, #87ceeb); 
+  color: #ffffff;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.shortcut-open-primary:hover {
+  background: linear-gradient(90deg, #0043cc, #6bc0e8);
+  filter: saturate(1.12);
+}
+
+.shortcut-open-primary:active {
+  transform: scale(0.98);
+  background: linear-gradient(90deg, #0038ab, #57b3e0);
+  filter: saturate(1.18);
+}
+
+.shortcut-open-primary .shortcut-open-icon {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+
+.shortcut-open-primary:focus-visible {
+  outline: 2px dashed #0057ff;
+  outline-offset: 2px;
+}
+
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 24px;
+  padding: 0 7px;
+  border: 1px solid #dcdcdc;
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: #ffffff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #17181a;
+}
+
+.kbd-sep {
+  font-size: 11px;
+  color: #b0b0b5;
+}
+
+.shortcut-keys-empty {
+  font-size: var(--fs-sm);
+  color: #9a9a9a;
+}
+
+
+.other-sec .shortcut-display {
+  min-width: 0;
+  height: auto;
+  min-height: 34px;
+  padding: 4px 10px;
+  font-family: inherit;
+  letter-spacing: 0;
+}
+
+.other-sec .shortcut-display.is-recording {
+  min-width: 132px;
+  padding: 4px 14px;
+}
+
+.shortcut-recording {
+  font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+
+
+
+.desktop-global-sec .desktop-global-body {
+  display: grid;
+  grid-template-columns: 46% minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+}
+.desktop-global-sec .desktop-global-shot {
+  margin: 0;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.desktop-global-sec .desktop-global-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.desktop-global-sec .desktop-global-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

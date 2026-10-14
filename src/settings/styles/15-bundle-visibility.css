@@ -1,0 +1,417 @@
+
+
+
+.changelog-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.changelog-intro {
+  margin: 6px 0 0;
+  font-size: var(--fs-sm, 12px);
+  line-height: 1.7;
+  opacity: 0.72;
+}
+
+.changelog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.changelog-empty {
+  margin: 0;
+  padding: 18px 0;
+  text-align: center;
+  font-size: var(--fs-sm, 12px);
+  opacity: 0.6;
+}
+
+.changelog-item {
+  padding: 12px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--r-md, 12px);
+  background: #fafafa;
+  color: inherit;
+}
+
+.changelog-item-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.changelog-version {
+  font-size: var(--fs-md, 14px);
+  font-weight: 500;
+}
+
+.changelog-date {
+  font-size: var(--fs-sm, 12px);
+  opacity: 0.6;
+}
+
+.changelog-latest-tag {
+  margin-left: auto;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1.7;
+  background: rgba(0, 87, 255, 0.12);
+  color: #0057ff;
+}
+
+.changelog-changes {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.changelog-changes li {
+  font-size: var(--fs-sm, 12px);
+  line-height: 1.9;
+}
+
+.changelog-changes li b {
+  font-weight: 600;
+}
+
+
+.group-changed-hint {
+  margin: 8px 0 0;
+  font-size: var(--fs-sm, 12px);
+  opacity: 0.62;
+}
+
+
+
+.free-api-entry-btn {
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: var(--fs-lg);
+  line-height: 1.6;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+
+.changelog-entry-btn {
+  height: 34px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 10px;
+  background: #eaf1ff;
+  color: #0057ff;
+  font-size: var(--fs-md);
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.changelog-entry-btn:hover {
+  background: #cfdfff;
+  color: #0046d4;
+}
+
+.changelog-entry-btn:active {
+  transform: scale(0.98);
+  background: #b9d0ff;
+}
+
+
+.free-api-entry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none; 
+  background: linear-gradient(90deg, #0057ff, #87ceeb); 
+  color: #ffffff;
+}
+
+.free-api-entry-btn:hover {
+  background: linear-gradient(90deg, #0043cc, #6bc0e8);
+  filter: saturate(1.12);
+}
+
+.free-api-entry-btn:active {
+  transform: scale(0.98);
+  background: linear-gradient(90deg, #0038ab, #57b3e0);
+  filter: saturate(1.18);
+}
+
+
+
+.free-api-entry-btn .free-api-entry-icon {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+
+.desktop-global-cta.free-api-entry-btn {
+  height: auto;
+  margin: 0;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: var(--fs-lg);
+  line-height: 1.6;
+  text-decoration: none;
+}
+
+.desktop-global-cta.free-api-entry-btn:hover,
+.desktop-global-cta.free-api-entry-btn:focus,
+.desktop-global-cta.free-api-entry-btn:active,
+.desktop-global-cta.free-api-entry-btn:visited {
+  text-decoration: none;
+}
+
+.changelog-modal-card {
+  
+  width: min(900px, calc(100vw - 80px));
+  max-width: none;
+}
+
+.changelog-modal-body {
+  max-height: 76vh;
+  overflow-y: auto;
+  
+  overscroll-behavior: contain;
+}
+
+
+.membership-modal-card,
+.changelog-modal-card {
+  --fs-sm: 14px;
+}
+
+
+html[data-theme="dark"] .changelog-entry-btn {
+  background: rgba(0, 87, 255, .20);
+  color: #66a4ff;
+}
+
+html[data-theme="dark"] .changelog-entry-btn:hover {
+  background: rgba(90, 150, 255, .28);
+  color: #a8ccff;
+}
+
+html[data-theme="dark"] .changelog-entry-btn:active {
+  background: rgba(90, 150, 255, .40);
+}
+
+
+html[data-theme="dark"] .changelog-item {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+html[data-theme="dark"] .changelog-latest-tag {
+  background: rgba(10, 132, 255, 0.18);
+  color: #4da3ff;
+}
+
+
+.membership-modal-card,
+.changelog-modal-card {
+  --fs-sm: 14px;
+  font-size: 14px;
+}
+
+.membership-modal-card *,
+.changelog-modal-card * {
+  font-size: 14px;
+}
+
+
+.changelog-update-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid rgba(0, 87, 255, 0.22);
+  border-radius: var(--r-md, 12px);
+  
+  background: linear-gradient(180deg, #e5efff, #ffffff 70%);
+}
+
+.cus-cap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #0057ff;
+}
+
+.cus-badge {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.cus-sites {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+
+.cus-site {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.cus-site.is-off {
+  border-color: rgba(194, 55, 47, 0.34);
+  background: #fdecea;
+  color: #c2372f;
+}
+
+.cus-site.is-new {
+  border-color: rgba(45, 191, 98, 0.36);
+  background: #eafaf0;
+  color: #1d8a49;
+}
+
+.cus-site.is-upd {
+  border-color: rgba(0, 87, 255, 0.28);
+  background: #ebf2ff;
+  color: #0057ff;
+}
+
+
+.changelog-entry-btn {
+  position: relative;
+}
+
+.changelog-entry-btn .dot-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #c2372f;
+  color: #ffffff;
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 17px;
+  text-align: center;
+}
+
+
+html[data-theme="dark"] .changelog-update-summary {
+  border-color: rgba(77, 163, 255, 0.28);
+  background: linear-gradient(180deg, #1e2a45, #27272a 70%);
+}
+
+html[data-theme="dark"] .cus-cap {
+  color: #4da3ff;
+}
+
+html[data-theme="dark"] .cus-badge {
+  color: rgba(244, 244, 245, 0.92);
+}
+
+html[data-theme="dark"] .cus-site.is-off {
+  border-color: rgba(245, 63, 63, 0.38);
+  background: #442a2d;
+  color: #ff8f85;
+}
+
+html[data-theme="dark"] .cus-site.is-new {
+  border-color: rgba(45, 191, 98, 0.4);
+  background: #1e3325;
+  color: #5fd18b;
+}
+
+html[data-theme="dark"] .cus-site.is-upd {
+  border-color: rgba(10, 132, 255, 0.4);
+  background: #1f3155;
+  color: #4da3ff;
+}
+
+html[data-theme="dark"] .changelog-entry-btn .dot-badge {
+  background: #e5484d;
+  color: #ffffff;
+}
+
+
+.changelog-intro-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.changelog-intro-row .other-settings-intro {
+  flex: 1;
+  min-width: 0;
+}
+
+.cu-check-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.cu-check-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.cu-check-btn svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+
+.cu-check-btn.is-checking {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.cu-feedback {
+  margin: 0;
+  color: #1a9e4f;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.cu-feedback.is-warn {
+  color: #9a5b00;
+}
+
+html[data-theme="dark"] .changelog-intro-row .cu-check-btn {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+html[data-theme="dark"] .changelog-intro-row .cu-check-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="dark"] .cu-feedback {
+  color: #5ee27f;
+}
+
+html[data-theme="dark"] .cu-feedback.is-warn {
+  color: #ffb340;
+}

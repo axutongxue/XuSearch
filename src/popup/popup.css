@@ -1,0 +1,5 @@
+@import "./styles/01-base-composer.css";
+@import "./styles/02-prompt-picker.css";
+@import "./styles/03-groups.css";
+@import "./styles/04-prompts-preview.css";
+@import "./styles/05-dark-mode.css";
